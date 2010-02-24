@@ -1,0 +1,32 @@
+useDynLib(constrainedKriging)
+
+importClassesFrom(sp, SpatialPolygons, SpatialPoints, SpatialPolygonsDataFrame, SpatialPointsDataFrame)
+
+importFrom(RandomFields, CovarianceFct)
+
+importClassesFrom(gpclib, gpc.poly )
+
+
+importFrom(gpclib, intersect, area.poly)
+
+
+exportClasses( preCKrigePolygons, preCKrigePoints)
+exportMethods(show)
+export(preCKrige,
+summary.preCKrigePolygons,
+	K,
+	CKrige,
+        print.CKrige.exout.polygons,
+        summary.CKrige.exout.polygons,
+        print.CKrige.exout.points,
+        summary.CKrige.exout.points,
+	covmodel,
+	covmodellist,
+	print.covmodel,
+	plot.preCKrigePolygons,
+        ck.colors,
+        gpc.copyright) 
+
+
+
+
