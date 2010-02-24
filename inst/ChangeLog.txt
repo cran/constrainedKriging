@@ -9,3 +9,9 @@
 
    * k in K geändert bei der Ausgabe der Punktkriging Vorhersagen
 
+
+2011-01-13 Christoph Hofer
+
+	* warings werden erzeugt falls CK oder CMCK nicht existiert
+	* M für die rücktransformation korrigiert sqrt(dist)
+
