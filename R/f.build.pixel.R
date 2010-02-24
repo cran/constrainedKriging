@@ -80,10 +80,15 @@
 
   pixcenter <- cbind( t.grid.bbox[1,1] + delta.x.pix + 0.5 * t.colwidth +  t.grid.coords$bx, 
 		      t.grid.bbox[2,1] + delta.y.pix + 0.5 * t.rowwidth  + t.grid.coords$ax)
-		   
+
+
   # sortierung der Pixelkoordinaten, dass sie von links unten spaltenweise geordnet sind
-  pixcenter <- pixcenter[ order( pixcenter[,1] ), ]
+  if( dim(pixcenter)[1] > 1)
+  {
+      pixcenter <- pixcenter[ order( pixcenter[,1] ), ]
+  }
   
+  if( is.null(pixcenter) ){pixcenter <- matrix(pixcenter ,ncol = 2)}
   ## testen welche Pixelzentren in welchen Polygonen liegen
   
   pix.in.poly <- f.p.in.poly(

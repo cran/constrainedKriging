@@ -47,8 +47,8 @@ t.pb.cov.matrix.list  <- lapply( t.n.iter,
     function( t.i, pixconfig, locations, model )
     {
 	t.col.range <- ( 2 * ( t.i-1 ) + 1 ):( 2 * ( t.i-1 ) + 2 )
-	t.pixel.center  <- as.matrix( pixconfig$pixcenter[ , t.col.range], ncol = 2 )
-
+	t.pixel.center  <- matrix( pixconfig$pixcenter[ , t.col.range], ncol = 2 )
+	
 	t.n.poly  <- length( pixconfig$posindex )
 
 	t.col.range <- ( 1 + ( t.i - 1 ) * t.n.poly):( t.i * t.n.poly )
@@ -99,17 +99,19 @@ t.pb.cov.matrix.list  <- lapply( t.n.iter,
     	t.poly.with.pixel.matrix <- matrix(
  				pix.in.poly[,!sa.polygons], 
 				ncol = sum(!sa.polygons)
-	    	    		)
-     
+			    )
+
+			    
 #	# Spalten der Matrix in Elemente einer Liste aufsplitten
 	t.poly.with.pixel.list <- split(
   				t.poly.with.pixel.matrix, 
 				col( t.poly.with.pixel.matrix)
 			    )
-	#cat("length list: ", length(t.poly.with.pixel.list), "\n")
+
 	t.pb.pixel.cov <- lapply(t.poly.with.pixel.list,
     			function(x, locations, t.pixel.center, pixconfig, model)
 			{
+			    
 			    t.locations.pix.cov <- f.point.rec.covmat(
 							pxcoord  = locations[ ,1 ],
 							pycoord  = locations[ ,2 ],

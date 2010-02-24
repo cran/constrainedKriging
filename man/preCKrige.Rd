@@ -44,7 +44,7 @@ pwidth = 0, pheight = 0, napp = 1)
 \dQuote{\code{SpatialPoints}} or \cr \dQuote{\code{SpatialPointsDataFrame}}
 that contains the point coordinates and if necessary additional point
 information (covariates) stored in the \code{data.frame} of the \code{SpatialPointsDataFrame} object, 
-or an object of the classes \dQuote{\code{SpatialPolygons}} or \cr \dQuote{\code{SpatialPolygonsDataFrame}}
+or an object of the classes \cr \dQuote{\code{SpatialPolygons}} or \dQuote{\code{SpatialPolygonsDataFrame}}
 with the coordinates of the polygons (block) and if necessary additional polygon information
 (covariates) stored in the data frame of the \code{SpatialPointsDataFrame} object.}
 %%% neighbours
@@ -218,7 +218,7 @@ defined in the ith list component of the \code{neighbours} argument of the
 \code{preCKrige} function.}
 \item{pix.in.poly}{is a binary matrix, dim = (npix, m).
 \code{pix.in.poly[k,l] = 1} indicate that the centroid of the kth pixel
-lies in the area of the lth polygon and \code{pix.in.poly[k,l] = 0}
+lies in the area of the lth polygon and \cr \code{pix.in.poly[k,l] = 0}
 indicate that the kth pixel centroid does not lie in the area of the lth
 polygon.}
 }% end value
@@ -256,8 +256,9 @@ neighbours <- poly2nb(meuse.blocks)
 class(neighbours)
 ### neighbours should be an object of the class "list"
 class(neighbours) <- "list"
-### compute the approximated block variance-covariance matrices of each block in 
-### meuse.blocks without the defined block neighbours
+### compute the approximated block variance-covariance
+### matrices of each block in meuse.blocks without the
+### defined block neighbours
 preCK_2 <- preCKrige(newdata = meuse.blocks, neighbours = neighbours,
     model = covmodel("exponential", 0.05, 0.15, scale = 192.5),
     pwidth = 75, pheight = 75)

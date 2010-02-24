@@ -110,37 +110,47 @@ data(meuse,meuse.blocks)
 # pixel area = 75m x 75m
 # exponential covariance function with measurement error = 0, nugget = 0.05,
 # part. sill =  0.15 and range parameter = 192.5
-preCK <- preCKrige(newdata = meuse.blocks,
-         model = covmodel("exponential", 0, 0.05, 0.15, scale = 192.5),
-	 pwidth = 75, pheight = 75)
+
+
+preCK=preCKrige(newdata=meuse.blocks,model= 
+    covmodel("exponential",0,0.05,0.15,192.5),pwidth=75,pheight=75)
     
-# block prediction by constrained kriging
-ck <- CKrige(formula = log(zinc) ~ sqrt(dist),
-    data = meuse, locations = ~ x + y, object = preCK, ex.out = TRUE)
+# block prediction by constrained kriging on the log scale
+
+CK=CKrige(formula=log(zinc)~sqrt(dist),data=meuse,
+locations=~x+y,object=preCK,ex.out=TRUE)
     
 # backtransformation to the original scale for the CK prediction
-beta <- ck$parameter$beta.coef
+
+beta=CK$parameter$beta.coef
+M=meuse.blocks@data$M
 c1 <-  0.2
 c2  <- beta[2]^2 * meuse.blocks@data$M
-c3  <- unlist( preCK@covmat )
-ck$object@data$Zn <- exp(ck$object@data$prediction + 0.5*(c1 + c2 - c3))
+CK$object@data$Zn=exp(CK$object@data$prediction
++ 0.5*(0.2+beta[2]^2*M-unlist(preCK@covmat)))
 
-# factor: the factor multiplied with the corresponding block mean
-# prediction gives the upper bound of the 97.5% confidence interval
-# of the prediction
-ck$object@data$factor <- exp(ck$object@data$prediction
-                         + 1.96*ck$object@data$prediction.se)/ck$object@data$Zn
+# U: upper limits of the relative 95 %  prediction intervals for CK
+# U multiplied by the predictions CK$object@data$Zn gives
+# the upper limits of the 95 % prediction intervals
+
+CK$object@data$U=exp(CK$object@data$prediction 
+    +1.96*CK$object@data$prediction.se) /CK$object@data$Zn
 
 # plots with spplot, generic function in the sp package
+# the plot shows the constrained kriging predictions on
+# the orginal scale
+# function ck.colors(n) create a rainbow-like  color vector
 
-# plot of the constrained block kriging prediction
-# function ck.colors(n) create a vector of n colors
-ticks <- seq(0, 1850, by = 185) 
-spplot(ck$object, zcol ="Zn" , col.regions = ck.colors(10), at = ticks,
-    colorkey= list(labels = list(at = ticks, labels = ticks)))
+breaks <- seq(0, 1850, by = 185) 
+spplot(CK$object,zcol="Zn",at=breaks,col.regions=ck.colors(10),
+colorkey=list(labels=list(at=breaks,labels=breaks)))
     
-# plot of the factor to get the upper bound of the 97.5% confidence interval
-spplot(ck$object, zcol = "factor", col.regions = ck.colors(10), at = seq(1,3, by = 0.2))
+# plot of the factor to get the upper bound of the
+97.5% confidence interval
+
+breaks=seq(1,3.2,by=0.2)
+spplot(CK$object,zcol="U",at=breaks,col.regions=ck.colors(11),
+colorkey=list(labels=list(at=breaks,labels=breaks)))
 }
 
 \keyword{methods}

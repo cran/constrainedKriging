@@ -104,7 +104,7 @@ The mean square prediction error (MSEP) of the three predictors are:
 \itemize{
 \item{MSPE of the universal kriging predictor for 1 block:}
 \deqn{ MSPE[ \widehat{Y}_{UK}(B) ] = \mathrm{ Cov }[ (
-\widehat{Y}_{UK}(B) - \mathbf{Y} )( \widehat{Y}_{UK}(B) - Y(B) )^{\prime} ] ,}{MSPE[ Y(B)_(UK) ] = Var[ ( Y(B)_(UK) - Y(B) ), (
+\widehat{Y}_{UK}(B) - Y(B))( \widehat{Y}_{UK}(B) - Y(B) )^{\prime} ]}{MSPE[ Y(B)_(UK) ] = Var[ ( Y(B)_(UK) - Y(B) ), (
 Y(B)_(UK) - Y(B) )' ],}
 \item{MSPE of the constrained kriging predictor for 1 block:}
 \deqn{ MSPE[ \widehat{\mathbf{Y}}_{CK} ] = MSPE[ \widehat{\mathbf{Y}}_{UK}

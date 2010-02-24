@@ -49,7 +49,7 @@ t.iQ1 <- crossprod( t.ichol.Q1, t.ichol.Q1 )
 else
 {
     t.Q1 <- t.Q
-    t.Q1[,] <- NaN
+    t.Q1[,] <- 0
     t.iQ1 <- t.Q1
     
 }
