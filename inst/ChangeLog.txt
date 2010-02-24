@@ -1,0 +1,11 @@
+2010-07-31  ChristophHofer
+
+	* correction of backtransformation in the CKrige example (CKrige.Rd)
+
+
+2010-08-04 Christoph Hofer
+
+   * Punktkriging korrigiert so dass jetzt auch zwischen Messfehler und kleinräumiger Varianz unterschieden werden kann
+
+   * k in K geändert bei der Ausgabe der Punktkriging Vorhersagen
+

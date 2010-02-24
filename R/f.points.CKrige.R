@@ -213,7 +213,7 @@ if( method == 2 )
     krige.result[,3] <- unlist( lapply( t.krige.res, function( poly ){ return( poly$P1 ) } ) )
     krige.result[,4] <- unlist( lapply( t.krige.res, function( poly ){ return( poly$Q1 ) } ) )
     krige.result[,5] <- unlist( lapply( t.krige.res, function( poly ){ return( poly$K ) } ) )
-    colnames( krige.result) = c("prediction", "prediction.se", "P1", "Q1", "k")
+    colnames( krige.result) = c("prediction", "prediction.se", "P1", "Q1", "K")
 }
 #
 if( method == 3)

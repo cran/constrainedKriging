@@ -116,27 +116,31 @@ preCK <- preCKrige(newdata = meuse.blocks,
     
 # block prediction by constrained kriging
 ck <- CKrige(formula = log(zinc) ~ sqrt(dist),
-    data = meuse, locations = ~ x + y, object = preCK)
+    data = meuse, locations = ~ x + y, object = preCK, ex.out = TRUE)
     
-# transforming back to the original scale can be done for CK directly as
-# the variance of the ck predictor matches the true block variance
-ck@data$Zn <- exp(ck@data$prediction + 0.5 * unlist(preCK@covmat))
+# backtransformation to the original scale for the CK prediction
+beta <- ck$parameter$beta.coef
+c1 <-  0.2
+c2  <- beta[2]^2 * meuse.blocks@data$M
+c3  <- unlist( preCK@covmat )
+ck$object@data$Zn <- exp(ck$object@data$prediction + 0.5*(c1 + c2 - c3))
 
 # factor: the factor multiplied with the corresponding block mean
 # prediction gives the upper bound of the 97.5% confidence interval
 # of the prediction
-ck@data$factor <- exp(ck@data$prediction + 1.96*ck@data$prediction.se)/ck@data$Zn
+ck$object@data$factor <- exp(ck$object@data$prediction
+                         + 1.96*ck$object@data$prediction.se)/ck$object@data$Zn
 
 # plots with spplot, generic function in the sp package
 
 # plot of the constrained block kriging prediction
 # function ck.colors(n) create a vector of n colors
 ticks <- seq(0, 1850, by = 185) 
-spplot(ck, zcol ="Zn" , col.regions = ck.colors(10), at = ticks,
+spplot(ck$object, zcol ="Zn" , col.regions = ck.colors(10), at = ticks,
     colorkey= list(labels = list(at = ticks, labels = ticks)))
     
 # plot of the factor to get the upper bound of the 97.5% confidence interval
-spplot(ck, zcol = "factor", col.regions = ck.colors(10), at = seq(1,3, by = 0.2))
+spplot(ck$object, zcol = "factor", col.regions = ck.colors(10), at = seq(1,3, by = 0.2))
 }
 
 \keyword{methods}

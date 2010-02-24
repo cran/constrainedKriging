@@ -37,13 +37,13 @@ gpc.polygons<- f.gpc.poly( polygons )
 #
 ### the left lower corner of the pixel grid is choosed randomly therefore
 ### one have to set a seed to get reproducable results
-if( n == 1 ){
- print( "Pixelgrid is fix!!!\n" )
-}
-else
-{
-cat( "The mean of ", n, "random Pixelgrids are calculated  !!!\n" )
-}
+# # # if( n == 1 ){
+# # #  print( "Pixelgrid is fix!!!\n" )
+# # # }
+# # # else
+# # # {
+# # # cat( "The mean of ", n, "random Pixelgrids are calculated  !!!\n" )
+# # # }
 #
 polygons.config <- lapply( as.vector( 1:length( polygons@polygons ), mode = "list" ),
 			function(x, neighbours)

@@ -35,7 +35,7 @@ pixgridInfo <- precompute(nrows =  t.mesh.n.row,
                      colwidth =  pixel.x.width,
                      rowsep = 0,
                      colsep = 0,
-                     cat.level = 1
+                     cat.level = 0
                      )
 
 
