@@ -65,11 +65,17 @@ f.bb.cov.one.configuration <- function(
       if( no.pix.in.poly[ t.element.index[ k, 1 ] ] == 0 &&
 	  no.pix.in.poly[ t.element.index[ k, 2 ] ] == 0 |
 	  sa.polygons[ t.element.index[ k, 1 ] ] == T &&
-	  sa.polygons[ t.element.index[ k, 2 ] ] == T )
+	  sa.polygons[ t.element.index[ k, 2 ] ] == T |
+          no.pix.in.poly[ t.element.index[ k, 1 ] ] == 0 &&
+	  sa.polygons[ t.element.index[ k, 2 ] ] == T |
+	  no.pix.in.poly[ t.element.index[ k, 2 ] ] == 0 &&
+	  sa.polygons[ t.element.index[ k, 1 ] ] == T 
+	  )
       {
 	  t.dist <- f.row.dist( matrix( t.centroids[ t.element.index[ k, 1 ], ], ncol = 2 ),
 	      			matrix( t.centroids[ t.element.index[ k, 2 ], ], ncol = 2 ) )
 	  t.bl.bl.cov[k] <- f.pp.cov( t.dist = t.dist, model = model )
+	  
       }
       if( no.pix.in.poly[ t.element.index[ k, 1 ] ] != 0 &&
 	  no.pix.in.poly[ t.element.index[ k, 2 ] ] != 0 &&
@@ -82,27 +88,34 @@ f.bb.cov.one.configuration <- function(
 	  ## number of rectangles which represent the two blocks
 	  t.bl.bl.cov[ k ] <-    ( t.tot.cov )  / ( t.n.rect )
       }
-      if( no.pix.in.poly[ t.element.index[ k,2 ] ] != 0 &&
-	  sa.polygons[ t.element.index[ k, 1 ] ] == T &&
-	  sa.polygons[ t.element.index [k, 2 ] ] == F |
+      if( no.pix.in.poly[ t.element.index[ k,2 ] ] != 0 && 
+	  sa.polygons[ t.element.index [k, 2 ] ] == F &&
+	  sa.polygons[ t.element.index[ k, 1 ] ] == T 
+	 |
           no.pix.in.poly[ t.element.index[ k, 1 ] ] == 0 &&
-          sa.polygons[ t.element.index [k, 1 ] ] == F )
+          sa.polygons[ t.element.index [k, 1 ] ] == F  &&
+          sa.polygons[ t.element.index [k, 2 ] ] == F &&
+	  no.pix.in.poly[ t.element.index[ k,2 ] ] != 0 )
       {
 	  t.bl.bl.cov[k] <- f.point.block.cov( 	pixconfig,
 	      					matrix(t.centroids[ t.element.index[ k, 1 ], ], ncol = 2 ),
 						model = model
 					    )[t.element.index[ k, 2 ] ]
+	   print( t.bl.bl.cov[k] )
       }
       if( no.pix.in.poly[t.element.index[k,1]] != 0 &&
 	  sa.polygons[t.element.index[k,1]] == F &&
 	  sa.polygons[t.element.index[k,2]] == T |
       	  no.pix.in.poly[t.element.index[k,2]] == 0 &&
-          sa.polygons[t.element.index[k,2]] == F  )
+          sa.polygons[t.element.index[k,2]] == F  &&
+          sa.polygons[ t.element.index [k, 1 ] ] == F &&
+	  no.pix.in.poly[ t.element.index[ k,1 ] ] != 0)
       {
 	  t.bl.bl.cov[k] <- f.point.block.cov(	pixconfig,
 	      					matrix( t.centroids[ t.element.index[ k, 2 ], ], ncol = 2 ),
 						model = model
 					    )[ t.element.index[ k, 1 ] ]
+	
       }
   } # end for (k in 1:dim ...
     

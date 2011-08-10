@@ -15,3 +15,11 @@
 	* warings werden erzeugt falls CK oder CMCK nicht existiert
 	* M für die rücktransformation korrigiert sqrt(dist)
 
+
+2011-01-13 Christoph Hofer
+
+
+	* plot.preCKrige geändert (Zeile 48) (Hinweis von A. Papritz)
+	* Auswahl der zufälligen Farben war auf 155 beschränkt
+ 	* jetzt entspricht die Anzahl der Anzahl Polygone
+
