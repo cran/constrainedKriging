@@ -22,4 +22,13 @@
 	* plot.preCKrige geändert (Zeile 48) (Hinweis von A. Papritz)
 	* Auswahl der zufälligen Farben war auf 155 beschränkt
  	* jetzt entspricht die Anzahl der Anzahl Polygone
+	* if statement im File f.bb.cov.one.configuration.R (Zeile 65) erweitert
+	* mit no.pix.in.poly[ t.element.index[ k, 1 ] ] == 0 &&	*  sa.polygons[ t.element.index[ k, 2 ] ] == T |	*  no.pix.in.poly[ t.element.index[ k, 2 ] ] == 0 &&	*  sa.polygons[ t.element.index[ k, 1 ] ] == T
+	* somit wir die Punkt-Punkt-Kovarianz zwischen Blöcken berechnet die keine Pixel enthalten aber 
+	* von der Fläche genug Gross wären (wurde vorher nicht berücksichtigt)
+	
 
+2011-08-11 Christoph Hofer
+	
+	* simple kriging weights wurden falsch ausgegeben
+	* file f.polygons.CKrige.R wurde in Zeile 199 korrigiert

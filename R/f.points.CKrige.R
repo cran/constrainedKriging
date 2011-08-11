@@ -234,9 +234,9 @@ if(  ex.out == T)
 	#sk.weights.matrix
 	if( is.null( dim(t.krige.res[[1]]$sk.weights) ) )
 	{
-	    sk.weights.matrix <- t(matrix( unlist( lapply( t.krige.res, function( points ){ return( points$sk.weights ) } ) ), ncol = nrow( data ) ))
+	    sk.weights.matrix <- t(matrix( unlist( lapply( t.krige.res, function( points ){ return( points$sk.weights ) } ) ), ncol = nrow( data ), byrow = T ))
 	}else{
-	    sk.weights.matrix <- t(matrix( unlist( lapply( t.krige.res, function( points ){ return( points$sk.weights[1,] ) } ) ), ncol = nrow( data ) ))
+	    sk.weights.matrix <- t(matrix( unlist( lapply( t.krige.res, function( points ){ return( points$sk.weights[1,] ) } ) ), ncol = nrow( data ), byrow = T))
 	    }
 	## extended output is a list
 	object <- SpatialPointsDataFrame( SpatialPoints( object@coords ), data = krige.result, match.ID = F)

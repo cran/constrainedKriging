@@ -43,7 +43,7 @@ t.support.covmat <- f.covmat.support( object@model, locations )
 #
 # Inversere Choleskymatrix L^-1
 t.ichol <- forwardsolve(
-    t.chol  <- t( chol(t.support.covmat ) ),
+    t.chol  <- t( chol( t.support.covmat ) ),
     diag( nrow( t.support.covmat ) )
     )
     
@@ -98,6 +98,9 @@ t.krige.res <- lapply(t.index,
 	
 	t.sk.weights  <- t.pred.covmat.ichol.trans %*% t.ichol
 
+	### print( dim( t.sk.weights ))
+	### print( c(t(t.pred.covmat) %*% solve(t.support.covmat ))[1:2] )
+	
 	## least square prediction
 
 	t.lin.trend.est <-  crossprod( t( t.pred.designmat), t.beta.coef )
@@ -193,9 +196,9 @@ if(  ex.out == T)
 	#sk.weights.matrix
 	if( is.null( dim(t.krige.res[[1]]$sk.weights) ) )
 	{
-	    sk.weights.matrix <- t(matrix( unlist( lapply( t.krige.res, function( poly ){ return( poly$sk.weights ) } ) ), ncol = nrow( data ) ))
+	    sk.weights.matrix <- t(matrix( unlist( lapply( t.krige.res, function( poly ){ return( poly$sk.weights ) } ) ), ncol = nrow( data ), byrow = T) )
 	}else{
-	    sk.weights.matrix <- t(matrix( unlist( lapply( t.krige.res, function( poly ){ return( poly$sk.weights[1,] ) } ) ), ncol = nrow( data ) ))
+	    sk.weights.matrix <- t(matrix( unlist( lapply( t.krige.res, function( poly ){ return( poly$sk.weights[1,] ) } ) ), ncol = nrow( data ), byrow = T ) )
 	    }
 	## extended output is a list
 	object <- SpatialPolygonsDataFrame( SpatialPolygons( object@polygons ), data = krige.result, match.ID = F)

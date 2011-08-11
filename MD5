@@ -1,4 +1,4 @@
-5e084a33273c9648394bdfa463e2ea0d *DESCRIPTION
+ac805b51e6369c04aadf7f1d0393873d *DESCRIPTION
 6038d9136d35d81a318c51ee8676996d *LICENCE
 4df984f48345924db29adf3c5a8460fa *NAMESPACE
 8cb6475a947d043db15d326e995a891c *R/AAA.R
@@ -26,10 +26,10 @@ f5051c51f7842d733e7306bba811e8b1 *R/f.p.in.poly.R
 870ce3f9a626ec9fc52b4e6433b981be *R/f.pixelgrid.R
 2a6b40aba73fe364777c11ee94064793 *R/f.point.block.cov.R
 e85fd690277504b7fcd5b6f8a0afb0b0 *R/f.point.rec.covmat.R
-dd0dfc5487cb8917b85976889b66badb *R/f.points.CKrige.R
+f256cc2893f2b4eadb0a82d1b93a8216 *R/f.points.CKrige.R
 55a7481a64cbcc4c8ddf3a9abb3abe61 *R/f.points.preCKrige.R
 acdac9cdbdd3f3c50f8a305d069f3a90 *R/f.polygoncovmat.R
-43742313051a283523811051803d4492 *R/f.polygons.CKrige.R
+26a6dd58472dde74eee897aab009b37e *R/f.polygons.CKrige.R
 bb44d19c93b62571748d66fca0a01629 *R/f.polygons.preCKrige.R
 040071d07cc611fa43b23f7df63179cf *R/f.pp.cov.R
 2b43ef3fe2a5ff3b5549666af0597e38 *R/f.preCKrige.check.and.test.R
@@ -40,7 +40,7 @@ bb44d19c93b62571748d66fca0a01629 *R/f.polygons.preCKrige.R
 a3a1129e265b37285185e7eb3894c73f *R/warnings.R
 ae063a9d6e8f7a964357aa880ce1f933 *data/meuse.blocks.rda
 773593ced1e58430adf0ba25b061b363 *inst/CITATION
-e5d0ac2d36740906feb197a62f35231b *inst/ChangeLog.txt
+3cc4dc5fa83dabe9674c45cb39b5fc44 *inst/ChangeLog.txt
 3e042e6ae398cfad66f7e297d5606423 *inst/doc/GPC_COPYRIGHT.txt
 b6a311856015eeb061c97aab1ba426b9 *man/CKrige.Rd
 027f055e59d6f8077217d03c7388a6a7 *man/constrainedKriging-package.Rd
