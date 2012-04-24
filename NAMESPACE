@@ -4,10 +4,8 @@ importClassesFrom(sp, SpatialPolygons, SpatialPoints, SpatialPolygonsDataFrame, 
 
 importFrom(RandomFields, CovarianceFct)
 
-importClassesFrom(gpclib, gpc.poly )
-
-
-importFrom(gpclib, intersect, area.poly)
+importClassesFrom(rgeos, gpc.poly )
+importFrom(rgeos, intersect, area.poly)
 
 
 exportClasses( preCKrigePolygons, preCKrigePoints)

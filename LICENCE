@@ -1,6 +1,6 @@
 Copyrights
 ==========
-    
+  
 The files are copyrighted by Christoph Hofer
 
 constrainedKriging, a package for nonlinear spatial prediction  with local change of support
@@ -22,33 +22,3 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-
-
-The license for the package gpclib used by constrainedKriging:
-
-/**************************************************************************
-Project:   Generic Polygon Clipper
-
-           A new algorithm for calculating the difference, intersection,
-           exclusive-or or union of arbitrary polygon sets.
-
-Author:    Alan Murta (email: gpc@cs.man.ac.uk)
-Version:   2.32
-Date:      17th December 2004
-
-Copyright: (C) 1997-2004, Advanced Interfaces Group,
-           University of Manchester.
-
-           This software is free for non-commercial use. It may be copied,
-           modified, and redistributed provided that this copyright notice
-           is preserved on all copies. The intellectual property rights of
-           the algorithms used reside with the University of Manchester
-           Advanced Interfaces Group.
-
-           You may not use this software, in whole or in part, in support
-           of any commercial product without the express consent of the
-           author.
-
-           There is no warranty or other guarantee of fitness of this
-           software for any purpose. It is provided solely "as is".
-***************************************************************************/

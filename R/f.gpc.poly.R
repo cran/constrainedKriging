@@ -9,7 +9,7 @@ f.gpc.poly <- function( polygons )
 ###  date: 15.2.2007
 {
 
-  
+
   t.gpc.polys<- lapply(polygons@polygons,
                 function(x, t.cell.area){return(as(x@Polygons[[1]]@coords, "gpc.poly"))},
                 )

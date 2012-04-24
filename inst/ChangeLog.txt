@@ -38,3 +38,17 @@
 	
 	* changed Package startup functions from .noLoad to .onAttach and
 	* the cat function for the startup text changed to Packagestartupmessage
+
+
+2012-11-11 Christoph Hofer
+
+	* replacement to gpclib package by the package roes
+	* changes in function f.intersect.area
+	* instead of area.poly( intersect( gpc.pixel, polygons))
+	* I have to use the try method since the intersect method of rgeos returns for 
+	* non-overlapping polygons an error
+ 
+		area <- try( area.poly( try( intersect( gpc.pixel, polygons ), silent = T ) ), silent = T )
+                if( is( area ) == "try-error" ){ area <- 0}
+                return( area )
+	
