@@ -32,3 +32,9 @@
 	
 	* simple kriging weights wurden falsch ausgegeben
 	* file f.polygons.CKrige.R wurde in Zeile 199 korrigiert
+
+
+2012-04-24 Christoph Hofer
+	
+	* changed Package startup functions from .noLoad to .onAttach and
+	* the cat function for the startup text changed to Packagestartupmessage

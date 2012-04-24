@@ -1,7 +1,7 @@
-ac805b51e6369c04aadf7f1d0393873d *DESCRIPTION
+8b6123095a564878791fbc4a7730c74d *DESCRIPTION
 6038d9136d35d81a318c51ee8676996d *LICENCE
 4df984f48345924db29adf3c5a8460fa *NAMESPACE
-8cb6475a947d043db15d326e995a891c *R/AAA.R
+ba6075b1e435c055047f98424d1488a8 *R/AAA.R
 eec7e87044c4dc7ae7f165fefa97dad2 *R/CKrige-methods.R
 fc4dad36efa6846ff9fa0357bdd898c3 *R/Class-preCKrigePoints.R
 3855f13b34c56e3bcf6aea131eb853fa *R/Class-preCKrigePolygons.R
@@ -40,7 +40,7 @@ bb44d19c93b62571748d66fca0a01629 *R/f.polygons.preCKrige.R
 a3a1129e265b37285185e7eb3894c73f *R/warnings.R
 ae063a9d6e8f7a964357aa880ce1f933 *data/meuse.blocks.rda
 773593ced1e58430adf0ba25b061b363 *inst/CITATION
-3cc4dc5fa83dabe9674c45cb39b5fc44 *inst/ChangeLog.txt
+e3d11d454c2d9a99821fe41284a0e7b0 *inst/ChangeLog.txt
 3e042e6ae398cfad66f7e297d5606423 *inst/doc/GPC_COPYRIGHT.txt
 b6a311856015eeb061c97aab1ba426b9 *man/CKrige.Rd
 027f055e59d6f8077217d03c7388a6a7 *man/constrainedKriging-package.Rd
