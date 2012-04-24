@@ -79,3 +79,11 @@
 	* -- running examples for arch É since their compilation
 	* take to much time
 
+2013-06-13
+        * based on a comment by Andreas Papritz
+	* in f.point.block.cov row and colwidth value was mixed up for the rxwidth and rywidth argument in the   
+	  f.point.rec.covmat -> Covariance between point an polygons discretised by non-quadratic pixels was wrong
+ 	* this bug is now fixed 
+2013-06-16
+	* covmodel "whittlematern" is no longer in use
+	* two new covmodels are added: "matern" and "whittle" see Randomfields package

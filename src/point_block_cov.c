@@ -370,6 +370,12 @@ void PointRectCov(
 				f_cov = f_cov_qexponential;
 				(*p_pcp).cp =  param_new + imodr + 1;
 				break;
+                
+            case 22: // lgd1
+				
+				f_cov = f_cov_whittle;
+				(*p_pcp).cp =  param_new + imodr + 1;
+				break;
 				
 			default:
 				// printf("Kein gültiges Kovarianzmodell.");

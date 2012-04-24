@@ -215,6 +215,13 @@ double f_cov_matern( double x, double *covpar);
 //
 //
 // ***************************************************
+// whittle Kovarianzfunktion
+// ***************************************************
+double f_cov_whittle( double x, double *covpar);
+// ***************************************************
+//
+//
+// ***************************************************
 // exponentielle Kovarianzfunktion
 // ***************************************************
 
@@ -271,10 +278,29 @@ double f_cov_matern( double x, double *covpar)
 	
 	double mat_cov;
 
-	mat_cov = *(covpar + 0) * ( 1 / ( pow( 2, ( *(covpar + 2)  - 1 ) ) * gammafn( *(covpar + 2) ) ) ) * pow( ( x / *(covpar + 1) ),  *(covpar + 2) ) * bessel_k( x / *(covpar + 1), *(covpar + 2), 1 );		
+//mat_cov = *(covpar + 0) * ( 1 / ( pow( 2, ( *(covpar + 2)  - 1 ) ) * gammafn( *(covpar + 2) ) ) ) * pow( ( x / *(covpar + 1) ),  *(covpar + 2) ) * bessel_k( x / *(covpar + 1), *(covpar + 2), 1 );
+    mat_cov = *(covpar + 0)* pow( 2, ( 1- *(covpar + 2) ) ) * pow( gammafn( *(covpar + 2) ), -1) * pow( sqrt( *(covpar + 2)  * 2 ) * (x / *(covpar + 1) ), *(covpar + 2) ) * bessel_k( x / *(covpar + 1), *(covpar + 2), 1 );
+	
 
 	return(mat_cov);
-} 
+}
+
+// ***************************************************
+// whittle Kovarianzfunktion
+// ***************************************************
+
+// *(covpar + 0) = partial Sill
+// *(covpar + 1) = Rangeparameter
+// *(covpar + 2) = Delta > 0
+// gammafn(a) Gammafunktion in Rmath.h
+// bessel_k(x,n,1) modifizierte besselfunction zweiter Art der Ordnung n
+double f_cov_whittle( double x, double *covpar)
+{
+	
+	double whi_cov;
+        whi_cov = *(covpar + 0)* pow( 2, ( 1- *(covpar + 2) ) ) * pow( gammafn( *(covpar + 2) ), -1) * pow( x / *(covpar + 1), *(covpar + 2) )  * bessel_k( x / *(covpar + 1), *(covpar + 2), 1 );
+	return(whi_cov);
+}
 
 // ***************************************************
 // pure_nugget Kovarianzfunktion
