@@ -18,7 +18,7 @@ The object contains the following slots:
 \item{dist}{mean Euclidean distance of the blocks from the river, normalized to the interval [0;1]}
 \item{M}{the (spatial) variance of the mean distance between points, uniformly distributed within the blocks, and the river}
 }} }
-} 
+}
 \usage{
 data(meuse.blocks)
 }
@@ -26,10 +26,12 @@ data(meuse.blocks)
 \seealso{\link{preCKrige} and \link{CKrige}}
 \keyword{datasets}
 \examples{
+\dontrun{
 data(meuse.blocks)
 summary(meuse.blocks)
 ### show the shape of the 259 blocks
 plot(meuse.blocks)
 ### plot maps of the covariate \code{dist} and attribute \code{M}
 spplot(meuse.blocks)
+}
 }

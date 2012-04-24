@@ -43,7 +43,7 @@ pwidth = 0, pheight = 0, napp = 1)
 \item{newdata}{either an object of the classes
 \dQuote{\code{SpatialPoints}} or \cr \dQuote{\code{SpatialPointsDataFrame}}
 that contains the point coordinates and if necessary additional point
-information (covariates) stored in the \code{data.frame} of the \code{SpatialPointsDataFrame} object, 
+information (covariates) stored in the \code{data.frame} of the \code{SpatialPointsDataFrame} object,
 or an object of the classes \cr \dQuote{\code{SpatialPolygons}} or \dQuote{\code{SpatialPolygonsDataFrame}}
 with the coordinates of the polygons (block) and if necessary additional polygon information
 (covariates) stored in the data frame of the \code{SpatialPointsDataFrame} object.}
@@ -90,7 +90,7 @@ By default, \code{napp} = 1.  See details.}
 If the objects for \code{newdata} are of the classes
 \dQuote{\code{SpatialPolygons}} or \cr \dQuote{\code{SpatialPolygonsDataFrame}}, \code{preCKrige} searches the
 polygon (block) neighbourhood configuration (defined by the argument
-\code{neighbours}) with the largest bounding box and generates a pixel gird 
+\code{neighbours}) with the largest bounding box and generates a pixel gird
 with the same area as the largest bounding box.  Subsequently, the
 covariance matrix of this pixels is calculated by using the
 \pkg{spatialCovariance} package and the polygon (block) areas of each
@@ -133,7 +133,7 @@ point-block covariances are calculated in C.
 \dQuote{\code{preCKrigePolygons}} if the object for the argument
 \code{newdata} is of the class \dQuote{\code{SpatialPolygons}} or
 \dQuote{\code{SpatialPolygonsDataFrame}} or an S4 object of the class
-\dQuote{\code{preCKrigePoints}} if the object for the argument \code{newdata} is 
+\dQuote{\code{preCKrigePoints}} if the object for the argument \code{newdata} is
 of the class \dQuote{\code{SpatialPoints}} or
 \dQuote{\code{SpatialPointsDataFrame}} ( see \code{\linkS4class{preCKrigePolygons}}
 or \code{\linkS4class{preCKrigePoints}} for the general structures of these
@@ -162,7 +162,7 @@ matrix for spatial interpolation by the \code{\link{CKrige}} function.
 of the class \dQuote{\code{SpatialPoints}}.}
 \item{coords}{matrix, dim = (n, 2) with the coordinates of the points.}
 
-An object of the class \dQuote{\code{preCKrigePolygons}} contains the 
+An object of the class \dQuote{\code{preCKrigePolygons}} contains the
 following slots (values are accessible by the @ operator):
 
 \item{covmat}{list of matrices, length = n, ith list
@@ -229,8 +229,10 @@ See main help page of the \pkg{\link{constrainedKriging}} package.}
 \seealso{ \code{\link{CKrige}} }
 
 \examples{
+\dontrun{
 ### first example
 ### load data
+
 data(meuse,meuse.blocks)
 
 ### plot blocks
@@ -241,9 +243,9 @@ plot(meuse.blocks)
 ### covariance function without a measurement error, a nugget  = 0.15 (micro
 ### scale white noise process) and a scale parameter = 192.5
 preCK_1  <- preCKrige(newdata = meuse.blocks, model = covmodel(modelname =
-              "exponential", mev = 0, nugget = 0.05, variance = 0.15, 
+              "exponential", mev = 0, nugget = 0.05, variance = 0.15,
 	      scale = 192.5), pwidth = 75, pheight = 75)
-    
+
 ### plot block approximation of block 59
 plot(preCK_1, 59)
 
@@ -271,6 +273,6 @@ if(!require(spdep))
 {
 cat("Please, install the package spdep to execute this example.\n")
 }
-
+}
 }
 \keyword{methods}

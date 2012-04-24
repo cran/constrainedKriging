@@ -19,7 +19,11 @@ t.intersect.area.list <- lapply( gpc.pixel,
                                                           ),
                                                           silent = T
                                                 )
-                                    if( is( area ) == "try-error" ){ area <- 0}
+
+                                    print("********************\n")
+                                    print( is( area ) )
+                                    print("********************\n")
+                                    if( length( area) == 1 && is( area ) == "try-error" ){ area <- 0}
                                     return( area )
                                 },
                                 polygons

@@ -10,11 +10,11 @@
 \alias{summary.CKrige.exout.polygons}
 \alias{print.CKrige.exout.points}
 \alias{summary.CKrige.exout.points}
-\title{Spatial interpolation (2D) by constrained, covariance-matching 
+\title{Spatial interpolation (2D) by constrained, covariance-matching
 constrained and universal, global Point or Block Kriging
 }
-\description{Function for constrained, covariance-matching 
-constrained and universal (external drift kriging) point or block (of any shape) kriging in a global 
+\description{Function for constrained, covariance-matching
+constrained and universal (external drift kriging) point or block (of any shape) kriging in a global
 neighbourhood and for isotropic covariance models.}
 %
 \usage{
@@ -26,19 +26,19 @@ CKrige( formula, data, locations, object, \ldots)
 }
 %
 \arguments{
-  \item{formula}{formula of the linear regression model in the form \code{response ~ terms of covariates}, for ordinary kriging use the 
+  \item{formula}{formula of the linear regression model in the form \code{response ~ terms of covariates}, for ordinary kriging use the
 	formula \code{response ~ 1}}
    \item{data}{a data frame with the values of the covariates, the names of the
    covariates used in the formula object must match the column
    names of \code{data}.}
-  \item{locations}{a \code{formula} object that describe the coordinates 
+  \item{locations}{a \code{formula} object that describe the coordinates
 	of the data locations (e.g \code{ ~ x+y })}
   \item{object}{either an object of the class \dQuote{\code{preCKrigePolygons}} for block kriging or of the class
 	\dQuote{\code{preCKrigePoints}} for point kriging. In general the output object of the \code{\link{preCKrige}} function.}
-\item{\ldots}{two further arguments to control the spatial 
+\item{\ldots}{two further arguments to control the spatial
 interpolation method and the output}
-  \item{method}{numeric value to choose the kriging method \code{1} 
-	universal (external drift), \code{method = 2} constrained, 
+  \item{method}{numeric value to choose the kriging method \code{1}
+	universal (external drift), \code{method = 2} constrained,
 	\code{method = 3} covariance-matching constrained kriging. By default, \code{method = 2}}
   \item{ex.out}{logical value, if \code{ex.out} is set \code{TRUE} \code{CKrige} returns an extended output with additional information,
   see details for more informations,  by default  \code{ex.out = F} }
@@ -92,8 +92,8 @@ Each list component contains the matrix with the  simple kriging weights of the 
 of the linear regression.}\cr
 
 The list of the extended output contains the additional component \code{CMCK.par} if the argument \code{method = 3}. The
-\code{CMCK.par} component is a list of lists with CMCK parameters, in particular  \code{P1} list of the P1 matrices, 
-\code{Q1} list of the Q1 matrices and  \code{K} list of the K matrices.} 
+\code{CMCK.par} component is a list of lists with CMCK parameters, in particular  \code{P1} list of the P1 matrices,
+\code{Q1} list of the Q1 matrices and  \code{K} list of the K matrices.}
 %
 \references{
 See main help page of the \pkg{\link{constrainedKriging}} package.}
@@ -103,6 +103,7 @@ See main help page of the \pkg{\link{constrainedKriging}} package.}
 \note{\code{print} and \code{summary} methods for the different \code{CKrige} output objects are available.}
 \seealso{ \code{\link{preCKrige}} }
 \examples{
+\dontrun{
 # load data
 data(meuse,meuse.blocks)
 
@@ -112,14 +113,14 @@ data(meuse,meuse.blocks)
 # part. sill =  0.15 and range parameter = 192.5
 
 
-preCK=preCKrige(newdata=meuse.blocks,model= 
+preCK=preCKrige(newdata=meuse.blocks,model=
     covmodel("exponential",0,0.05,0.15,192.5),pwidth=75,pheight=75)
-    
+
 # block prediction by constrained kriging on the log scale
 
 CK=CKrige(formula=log(zinc)~sqrt(dist),data=meuse,
 locations=~x+y,object=preCK,ex.out=TRUE)
-    
+
 # backtransformation to the original scale for the CK prediction
 
 beta=CK$parameter$beta.coef
@@ -133,7 +134,7 @@ CK$object@data$Zn=exp(CK$object@data$prediction
 # U multiplied by the predictions CK$object@data$Zn gives
 # the upper limits of the 95 % prediction intervals
 
-CK$object@data$U=exp(CK$object@data$prediction 
+CK$object@data$U=exp(CK$object@data$prediction
     +1.96*CK$object@data$prediction.se) /CK$object@data$Zn
 
 # plots with spplot, generic function in the sp package
@@ -141,10 +142,10 @@ CK$object@data$U=exp(CK$object@data$prediction
 # the orginal scale
 # function ck.colors(n) create a rainbow-like  color vector
 
-breaks <- seq(0, 1850, by = 185) 
+breaks <- seq(0, 1850, by = 185)
 spplot(CK$object,zcol="Zn",at=breaks,col.regions=ck.colors(10),
 colorkey=list(labels=list(at=breaks,labels=breaks)))
-    
+
 # plot of the factor to get the upper bound of the
 97.5% confidence interval
 
@@ -152,5 +153,5 @@ breaks=seq(1,3.2,by=0.2)
 spplot(CK$object,zcol="U",at=breaks,col.regions=ck.colors(11),
 colorkey=list(labels=list(at=breaks,labels=breaks)))
 }
-
+}
 \keyword{methods}

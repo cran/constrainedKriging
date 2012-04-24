@@ -23,7 +23,7 @@ summary.preCKrigePolygons,
 	print.covmodel,
 	plot.preCKrigePolygons,
         ck.colors,
-        gpc.copyright) 
+        f.point.block.cov) 
 
 
 

@@ -42,7 +42,7 @@
 
 2012-11-11 Christoph Hofer
 
-	* replacement to gpclib package by the package roes
+	* replacement of gpclib package by the package rgeos
 	* changes in function f.intersect.area
 	* instead of area.poly( intersect( gpc.pixel, polygons))
 	* I have to use the try method since the intersect method of rgeos returns for 
@@ -51,4 +51,31 @@
 		area <- try( area.poly( try( intersect( gpc.pixel, polygons ), silent = T ) ), silent = T )
                 if( is( area ) == "try-error" ){ area <- 0}
                 return( area )
-	
+
+
+2012-11-21
+
+	* based on the wish of Andreas Papritz the function f.point.block.cov is included in the export in the namespace
+
+
+
+2012-11-29
+
+
+	* corrected spelling error in the description file based on a comment of Jason Matney
+
+
+2012-11-30
+
+	* I supplemented the if statement in the hidden function f.intersect.area.R
+	* by the terms length( area ) == 1 to
+        * if( length( area = 1) && is( area ) == "try-error" ){ area <- 0}
+	* since the if statement produced a warning   when  area was a vector
+
+
+2012-12-23
+
+	* in version 0.1.9 all examples are ignored as the step
+	* -- running examples for arch É since their compilation
+	* take to much time
+
