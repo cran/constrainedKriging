@@ -1,11 +1,11 @@
-4e96599f7fd0936814817ee717b0602c *DESCRIPTION
+5dfce7286306a7d8c4267b69ea69dbeb *DESCRIPTION
 0233e42cb5a1b002526f47a9f2ca715f *NAMESPACE
 009664806d9f528f970ad4e9d846a82a *R/AAA.R
 eec7e87044c4dc7ae7f165fefa97dad2 *R/CKrige-methods.R
 fc4dad36efa6846ff9fa0357bdd898c3 *R/Class-preCKrigePoints.R
 3855f13b34c56e3bcf6aea131eb853fa *R/Class-preCKrigePolygons.R
 4d7573a5255e9e322f6fc8d712758e60 *R/ck.colors.R
-f50507fd7578aaba610174aef7d72621 *R/covmodlist.R
+0a00f45d566e2b18819b6d928ba45812 *R/covmodlist.R
 e81642add9e0186045cc3376863fc4b7 *R/f.bb.cov.one.configuration.R
 ae6c49408cb1724f779e8a02b11a436e *R/f.bbox.information.R
 8d31f07ac2fe55ae870a526d92882e57 *R/f.build.pixel.R
@@ -15,7 +15,7 @@ d830a3bc5a2caf51b9a04903c346a721 *R/f.centroid.polygon.R
 ec2e8f9e0b8908a10e3925a105930d5a *R/f.covmat.support.R
 8ad473f1266ee90e04594c7b5bf8a5ec *R/f.gpc.poly.R
 c29d6118521ebebaffe0a501d46c3070 *R/f.indicate.small.pred.locations.R
-b9d5ff8c48f258a395bf6c8f08d0b81a *R/f.intersect.area.R
+e46bedf3ba685f7320a12d403ddc9097 *R/f.intersect.area.R
 49f3bf89d720f7eaa8da9a0ddb62c64c *R/f.intersect.max.area.R
 7eec86f656eaf83db89a2a0f01d9e6ac *R/f.kriging.functions.R
 084387ebb58aafbbb37251d0ea476033 *R/f.kriging.method.R
@@ -40,7 +40,7 @@ a3a1129e265b37285185e7eb3894c73f *R/warnings.R
 5a625b552274e0264c9b566e0005a76c *R/z#f.build.pixel.R
 ae063a9d6e8f7a964357aa880ce1f933 *data/meuse.blocks.rda
 773593ced1e58430adf0ba25b061b363 *inst/CITATION
-03a193fc11a5e9960c77ae337291baa8 *inst/ChangeLog.txt
+b395ef5f576131de225199f0eb739578 *inst/ChangeLog.txt
 3e042e6ae398cfad66f7e297d5606423 *inst/doc/GPC_COPYRIGHT.txt
 b73d5ff0a7a2c2525b6f3bbb0fb4b096 *man/CKrige.Rd
 027f055e59d6f8077217d03c7388a6a7 *man/constrainedKriging-package.Rd

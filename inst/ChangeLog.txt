@@ -87,3 +87,6 @@
 2013-06-16
 	* covmodel "whittlematern" is no longer in use
 	* two new covmodels are added: "matern" and "whittle" see Randomfields package
+2013-06-16
+	* the supplement in the hidden function f.intersect.area.R is not needed anymore since rgeos 0.2-17 can 
+	* can handel gpc.poly objects 

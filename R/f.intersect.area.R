@@ -13,17 +13,7 @@ t.intersect.area.list <- lapply( gpc.pixel,
                                 function( gpc.pixel, polygons){
 
                                     ### old return( area.poly( intersect( gpc.pixel, polygons ) ) )
-                                    area <- try(
-                                                area.poly(
-                                                          try( intersect( gpc.pixel, polygons ), silent = T )
-                                                          ),
-                                                          silent = T
-                                                )
-
-                                    print("********************\n")
-                                    print( is( area ) )
-                                    print("********************\n")
-                                    if( length( area) == 1 && is( area ) == "try-error" ){ area <- 0}
+                                    area <- area.poly( intersect( gpc.pixel, polygons ) )
                                     return( area )
                                 },
                                 polygons
