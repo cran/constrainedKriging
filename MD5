@@ -1,5 +1,5 @@
-5dfce7286306a7d8c4267b69ea69dbeb *DESCRIPTION
-0233e42cb5a1b002526f47a9f2ca715f *NAMESPACE
+fa103d09e6fe357b9af15f7bb63f034f *DESCRIPTION
+78a21e5ea3693343c0303f242cfe9d95 *NAMESPACE
 009664806d9f528f970ad4e9d846a82a *R/AAA.R
 eec7e87044c4dc7ae7f165fefa97dad2 *R/CKrige-methods.R
 fc4dad36efa6846ff9fa0357bdd898c3 *R/Class-preCKrigePoints.R
@@ -40,7 +40,7 @@ a3a1129e265b37285185e7eb3894c73f *R/warnings.R
 5a625b552274e0264c9b566e0005a76c *R/z#f.build.pixel.R
 ae063a9d6e8f7a964357aa880ce1f933 *data/meuse.blocks.rda
 773593ced1e58430adf0ba25b061b363 *inst/CITATION
-b395ef5f576131de225199f0eb739578 *inst/ChangeLog.txt
+deb665ff550d0b925affb43e7395899c *inst/ChangeLog.txt
 3e042e6ae398cfad66f7e297d5606423 *inst/doc/GPC_COPYRIGHT.txt
 b73d5ff0a7a2c2525b6f3bbb0fb4b096 *man/CKrige.Rd
 027f055e59d6f8077217d03c7388a6a7 *man/constrainedKriging-package.Rd

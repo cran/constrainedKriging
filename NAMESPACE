@@ -2,6 +2,8 @@ useDynLib(constrainedKriging)
 
 importClassesFrom(sp, SpatialPolygons, SpatialPoints, SpatialPolygonsDataFrame, SpatialPointsDataFrame)
 
+import(methods, spatialCovariance)
+
 importFrom(RandomFields, CovarianceFct)
 
 importClassesFrom(rgeos, gpc.poly )

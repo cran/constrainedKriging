@@ -1,5 +1,5 @@
 Package: constrainedKriging
-Version: 0.2.1
+Version: 0.2.2
 Type: Package
 Title: Constrained, covariance-matching constrained and universal point
         or block kriging
@@ -28,7 +28,7 @@ Depends: R (>= 2.9.0), sp(>= 0.9-60), spatialCovariance(>= 0.6-4),
         methods
 Imports: rgeos(>= 0.2-17), RandomFields(>= 1.3.41),
 Suggests: spdep(>= 0.5-43)
-Packaged: 2013-06-20 20:14:05 UTC; hofc
+Packaged: 2013-10-02 09:40:45 UTC; hofc
 NeedsCompilation: yes
 Repository: CRAN
-Date/Publication: 2013-06-21 08:13:27
+Date/Publication: 2013-10-02 12:05:53
