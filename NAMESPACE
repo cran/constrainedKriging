@@ -4,7 +4,7 @@ importClassesFrom(sp, SpatialPolygons, SpatialPoints, SpatialPolygonsDataFrame, 
 
 import(methods, spatialCovariance)
 
-importFrom(RandomFields, CovarianceFct)
+importFrom(RandomFields, RFoldstyle, CovarianceFct)
 
 importClassesFrom(rgeos, gpc.poly )
 importFrom(rgeos, intersect, area.poly)

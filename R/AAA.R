@@ -10,3 +10,4 @@
 .onUnload <- function(libpath) {
     rm(.CONSTRAINEDKRIGING_CACHE)
 }
+
