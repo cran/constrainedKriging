@@ -38,7 +38,7 @@ else
 #
 ### covmodel of measurement free error process
 model.me.free <- object@model[unlist(lapply(1:length(object@model), function(i,m){m[[i]]$model != "mev"}, m = object@model))]
-## Kovarianzmatrix der STŸtzpunkte
+## Kovarianzmatrix der ST?tzpunkte
 t.support.covmat <- f.covmat.support( object@model, locations )   
 #
 # Inversere Choleskymatrix L^-1
@@ -86,7 +86,7 @@ t.krige.res <- lapply(t.index,
 	t.pred.designmat <- matrix(t.pred.designmat[ t.indices, ], ncol = nrow( t.beta.coef ))
 
 	#cat("Parzelle: ", i, "\n")
-	# Kovarianz zwischen den StŸtzpunkten und den Zielblšcken (n X m Matrix)
+	# Kovarianz zwischen den St?tzpunkten und den Zielbl?cken (n X m Matrix)
 	t.pred.covmat <- f.point.block.cov( pixconfig = pixconfig, locations = locations, model = model)
 
        #  C'(L^-1)'

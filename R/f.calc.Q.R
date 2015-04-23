@@ -29,7 +29,7 @@ t.Q <- t.skvar - crossprod( t( crossprod( t( t.aux.I ), t.cov.beta.coef ) ), t( 
 ### Eigenwerte der Matrix Q
 t.Q.eig    <- eigen(t.Q, symmetric=T)
 
-# # # kontrolle ob die Eigenwerte gršsser als Null sind
+# # # kontrolle ob die Eigenwerte gr?sser als Null sind
 if( min( t.Q.eig$values ) > 0 )
 {
     t.sqrt.diag.Qeig <- diag( sqrt( t.Q.eig$values ), nrow=length( t.Q.eig$values ) )

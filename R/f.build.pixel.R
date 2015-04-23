@@ -63,13 +63,13 @@
   ## print(t.grid.bbox)
   ## da das Zentrum des Pixels bestimmt ob ein Polygon approximiert wird
   ## wird der Startpunkt des Gitters nach links unten verschoben. Andernfalls
-  ## hätte die untere linke Ecke nicht die gleiche Wahrscheinlichkeit ein Pixel
+  ## h?tte die untere linke Ecke nicht die gleiche Wahrscheinlichkeit ein Pixel
   ##punkt zu besitzten
 
   t.grid.bbox[1,1] <- t.grid.bbox[1,1] - 0.5 * t.colwidth
   t.grid.bbox[2,1] <- t.grid.bbox[2,1] - 0.5 * t.rowwidth
 
-  ## Zuf‰lliger Startpunkt des Gitters im linken unteren Ecke falls ein seed gesetzt wurde
+  ## Zuf?lliger Startpunkt des Gitters im linken unteren Ecke falls ein seed gesetzt wurde
   ##  t.grid.points Gitterpunkte  (Zentrum des Pixels 0.5*colwidth und 0.5*rowwidth)
   ## a ist in Zeilen (row) Richtung und b ist in Spalten (col) Richtung
 
@@ -98,7 +98,7 @@
 		       colwidth = t.colwidth
 		       )
 
-  ##no.pix.in.poly anzahl pixelcenter in den Polygonfl‰chen
+  ##no.pix.in.poly anzahl pixelcenter in den Polygonfl?chen
   ##no.pix.in.poly <- apply(pix.in.poly,2,sum)
 
   no.pix.in.poly   <- unlist( lapply( split( pix.in.poly, col(pix.in.poly))  , sum) )
@@ -133,7 +133,7 @@ for(i in 1:t.n.pred.loc)
 		rw = t.rowwidth
 	    )
 	} # end if( sum(sa.polygons....
-	#Liste mit den gemeinsamen Flächen
+	#Liste mit den gemeinsamen Fl?chen
 	t.inter.area.list <- lapply(
 	    gpc.polygons,
 	    FUN = f.intersect.area,

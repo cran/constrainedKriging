@@ -24,7 +24,7 @@ f.pixconfig <- function(
 #
 pixgridInfo = pixgrid$pixgridInfo
 #
-# Kontrolle welche Polygone/Blöcke habe eine Fläche die kleiner als die Fläche eines Pixel ist
+# Kontrolle welche Polygone/Bl?cke habe eine Fl?che die kleiner als die Fl?che eines Pixel ist
 # sa.poylgons = boolean vector of small area polygons
 sa.polygons <- f.indicate.small.pred.locations( polygons= polygons,
     						pixarea= pixgridInfo$rowwidth * pixgridInfo$colwidth
@@ -60,10 +60,10 @@ if( n > 1){
 }
 else
 {
-    ### einstellungen für die ersten Simulationen !!!!!!!
-    ##t.p.x.null <-  t.grid.bbox[1,1]  + 0.48*t.rowwidth  ## für die Simulationsexperimente
+    ### einstellungen f?r die ersten Simulationen !!!!!!!
+    ##t.p.x.null <-  t.grid.bbox[1,1]  + 0.48*t.rowwidth  ## f?r die Simulationsexperimente
     ##t.p.y.null <- t.grid.bbox[2,1] 
-    delta.x.pix <-  0.5 * pixgridInfo$colwidth## + 3.5## für die Simulationsexperimente
+    delta.x.pix <-  0.5 * pixgridInfo$colwidth## + 3.5## f?r die Simulationsexperimente
     delta.y.pix <-  0.5 * pixgridInfo$rowwidth ##  - 0.7
 }
   

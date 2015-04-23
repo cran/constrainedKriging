@@ -1,30 +1,30 @@
 f.bb.cov.one.configuration <- function(
     					pixconfig,
-                                       	pixcm,
-                                        model,
-					i
-			             )
+             pixcm,
+             model,
+              i
+              )
 ### purpose: calculate the polygon-polygon covariance for  one given 
 ###          configuration pixconfig
 ###
 ### arguments:
 ###           pixconfig = list,
 ###                            	1. element = pixcenter = Koordinaten des Schwerpunktes des linken unteren Pixels
-###                            	2. element = t.rowwidth = Pixelhšhe
+###                            	2. element = t.rowwidth = Pixelh?he
 ###                            	3. element = t.colwidth = Pixelbreite
 ###                            	4. element = t.nrows = # Zeilen
 ###                            	5. element = t.nrows = # Spalten
-###                            	6. element = t.pixel.poly.dim = Vector of 2 natŸrliche Zahlen
+###                            	6. element = t.pixel.poly.dim = Vector of 2 nat?rliche Zahlen
 ###				   erste Zahl  = totale Anzahl Pixel, zweite Zahl = Anzahl Polygone
 ###                            	7. element = no.pix.in.poly= Vector mit m Elementen m = # Polygone
 ###				   Jedes Element beschreibt durch wieviele Pixel ein Polygon approximiert wird
 ###				   z.B c(8,3,2,10) = 1. Polygon durch 8, 2. Polygon durch 3, ...
 ###				8. element = sa.polygons = boolscher Vector mit m Elementen, m = # Polygone
-###				    falls Element TRUE, FlŠche des Polygons kleiner als die FlŠche eines Pixels, FALSE sonst
+###				    falls Element TRUE, Fl?che des Polygons kleiner als die Fl?che eines Pixels, FALSE sonst
 ###				9. element = t.centroids = m X 2 Matrix mit den Schwerpunkt-Koordinaten der m Polygone
 ###				10. element = posindex = m-Vector, mit dem Listen-Index der Polygon
-###				11. element = t.which.poly = Liste, LŠnge = totale Anzahl Pixel
-###				    Beschreibt fŸr jeden Pixelschwerpunkt in welchem Polygon er liegt.
+###				11. element = t.which.poly = Liste, L?nge = totale Anzahl Pixel
+###				    Beschreibt f?r jeden Pixelschwerpunkt in welchem Polygon er liegt.
 ###				    zb. 17 Element der Liste mit Wert 3 bedeutet, dass der 17 Pixelschwerpunkt in Polygon 3 liegt
 ###				    interger(0) bedeutet, dass der Pixelschwerpunkt in keinem Polygonliegt
 ###           pixcm =  p X p Kovarianzmatrix der Pixel p = Anzahl Pixel
