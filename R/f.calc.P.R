@@ -17,18 +17,18 @@ f.calc.P <- function(t.bb.covmat, t.pred.designmat, t.cov.beta.coef)
 ### date: 27.3.2007
 {
 
-t.P <- t.bb.covmat - tcrossprod( crossprod( t( t.pred.designmat ) , t.cov.beta.coef ), t.pred.designmat )
+  t.P <- t.bb.covmat - tcrossprod( crossprod( t( t.pred.designmat ) , t.cov.beta.coef ), t.pred.designmat )
 
-t.P.eig <- eigen(t.P,symmetric = T)
+  t.P.eig <- eigen(t.P,symmetric = TRUE)
 
-if( min( t.P.eig$values ) >= 0 )
-{
- t.P1 <- crossprod( t( t.P.eig$vectors ), tcrossprod( sqrt( diag( t.P.eig$values, nrow=length( t.P.eig$values ) ) ), t.P.eig$vector ) )
-}
-else
-{
-t.P1 <- t.P
-t.P1[,] <- NaN
-}
-return( list( P =  t.P, P1 = t.P1 ) )
+  if( min( t.P.eig$values ) >= 0 )
+  {
+    t.P1 <- crossprod( t( t.P.eig$vectors ), tcrossprod( sqrt( diag( t.P.eig$values, nrow=length( t.P.eig$values ) ) ), t.P.eig$vector ) )
+  }
+  else
+  {
+    t.P1 <- t.P
+    t.P1[,] <- NaN
+  }
+  return( list( P =  t.P, P1 = t.P1 ) )
 } ## end function f.calc.P

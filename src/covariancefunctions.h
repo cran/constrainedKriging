@@ -164,6 +164,7 @@ double f_cov_circular( double x, double *covpar);
 // It allows for simulating random fields where fractal
 // dimension and Hurst coefficient can be chosen independently.
 // It has negative correlations for b>c and large x
+// 2023-11-20 A. Papritz parameter c set equal to 3                          
 // ***************************************************
 double f_cov_cauchytbm( double x, double *covpar);
 // ***************************************************
@@ -374,13 +375,14 @@ double f_cov_cauchy( double x, double *covpar)
 // *(covpar + 1) = Rangeparameter
 // *(covpar + 2) = parameter a real
 // *(covpar + 3) = parameter b real 
-// *(covpar + 4) = parameter c real
+// *(covpar + 4) = parameter c real (2023-11-20, A.Papritz, parameter set equal to 3)
 // x = lad Distanz
 // ***************************************************
 double f_cov_cauchytbm( double x, double *covpar)
 {
 	double cauchytbm_cov;
-	cauchytbm_cov = *(covpar + 0) * (1 + ( 1- *(covpar + 3) / *(covpar + 4) ) * pow( x / *(covpar + 1), *(covpar + 2)) ) * pow(1 + pow(x / *(covpar + 1), *(covpar + 2)), ( -1 * (*(covpar + 3))/ (*(covpar + 2)) ) -1 );
+// 	cauchytbm_cov = *(covpar + 0) * (1 + ( 1- *(covpar + 3) / *(covpar + 4) ) * pow( x / *(covpar + 1), *(covpar + 2)) ) * pow(1 + pow(x / *(covpar + 1), *(covpar + 2)), ( -1 * (*(covpar + 3))/ (*(covpar + 2)) ) -1 );
+	cauchytbm_cov = *(covpar + 0) * (1 + ( 1- *(covpar + 3) / 3 ) * pow( x / *(covpar + 1), *(covpar + 2)) ) * pow(1 + pow(x / *(covpar + 1), *(covpar + 2)), ( -1 * (*(covpar + 3))/ (*(covpar + 2)) ) -1 );
 	return(cauchytbm_cov);
 	
 }

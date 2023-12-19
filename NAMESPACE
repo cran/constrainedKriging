@@ -1,45 +1,46 @@
-useDynLib(constrainedKriging)
+import(sp)
 
-importClassesFrom(sp, SpatialPolygons, SpatialPoints, SpatialPolygonsDataFrame, SpatialPointsDataFrame)
+importFrom( "graphics", "par", "points", "polygon", "rect", "text",
+            "title" )
+importFrom( "grDevices", "hsv" )
+importFrom( "methods", "as", "is", "new" )
+importFrom( "parallel", "mclapply", "makePSOCKcluster", "clusterEvalQ", 
+            "clusterExport", "parLapply", "stopCluster")
+importFrom( "sf", "st_area", "st_as_sfc", "st_bbox", "st_centroid", 
+            "st_coordinates", "st_intersection", "st_intersects", 
+            "st_polygon", "st_point", "st_sfc" )
+importFrom( "spatialCovariance", "computeV", "precompute" )
+importFrom( "stats", "delete.response", "dist", "model.frame", "model.matrix",
+            "model.response", "runif", "sd", "terms" )
+importFrom( "utils", "RShowDoc", "str" )
 
-importFrom(sp, bbox, point.in.polygon, SpatialPoints, SpatialPointsDataFrame, SpatialPolygons, SpatialPolygonsDataFrame)
+exportClasses( "preCKrigePolygons", "preCKrigePoints" )
+exportMethods( "show", "CKrige" )
 
-import(methods, spatialCovariance)
-
-importFrom(RandomFields, RFoldstyle, CovarianceFct)
-
-importClassesFrom(rgeos, gpc.poly )
-
-importFrom(rgeos, intersect, area.poly)
-
-
-S3method(print, CKrige.exout.polygons)
-S3method(print, CKrige.exout.points)
-S3method(print, covmodel)
-S3method(summary, preCKrigePolygons)
-S3method(summary, preCKrigePoints)
-S3method(summary, CKrige.exout.polygons)
-S3method(summary, CKrige.exout.points)
-S3method(plot, preCKrigePolygons)
-
-
-exportClasses( preCKrigePolygons, preCKrigePoints)
-exportMethods(show)
-export(preCKrige,
-summary.preCKrigePolygons,
-	K,
-	CKrige,
-        print.CKrige.exout.polygons,
-        summary.CKrige.exout.polygons,
-        print.CKrige.exout.points,
-        summary.CKrige.exout.points,
-	covmodel,
-	covmodellist,
-	print.covmodel,
-	plot.preCKrigePolygons,
-        ck.colors,
-        f.point.block.cov) 
+export(
+  "ck.colors",
+  "CKrige",
+  "covmodel",
+  "covmodellist",
+  "f.point.block.cov",
+  "preCKrige",
+  "preCKrigePoints",     # generator function of class preCKrigePoints
+  "preCKrigePolygons",   # generator function of class preCKrigePolygons
+  "K"
+) 
 
 
+# S3method( "print", "preCKrigePoints" )
+# S3method( "print", "preCKrigePolygons" )
+S3method( "print", "CKrige.exout.points" )
+S3method( "print", "CKrige.exout.polygons" )
+S3method( "print", "covmodel" )
 
+S3method( "summary", "preCKrigePoints" )
+S3method( "summary", "preCKrigePolygons" )
+S3method( "summary", "CKrige.exout.polygons" )
+S3method( "summary", "CKrige.exout.points" )
 
+S3method( "plot", "preCKrigePolygons" )
+
+useDynLib( constrainedKriging, .registration = TRUE )

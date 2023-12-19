@@ -25,6 +25,7 @@
 
 // Author: Christoph Hofer
 // Date: Dezember 2009
+// 2023-01-24 A. Papritz elimination of unnneeded variable sc_v
 
 #include <stdio.h>
 #include<math.h>
@@ -50,17 +51,14 @@ void f_int_boundaries(
 					    double *ppa)
 {
 
-	int i;
+	/* 
+	 * int i;
+	 */
 	double sc_a, sc_b, sc_c, sc_d;
 	
 	double *psc_v;
 	psc_v = (double*) modparam; // cast void pointer in double pointer
-	
-	double sc_v[] = {-1,-1,-1,-1,
-					 -1,-1,-1,-1,
-					 -1,-1,-1,-1,
-					 -1,-1,-1,-1}; // scaled_vertex
-	
+		
 	sc_a = *(psc_v + 0);
 	sc_b = *(psc_v + 1);
 	sc_c = *(psc_v + 2);

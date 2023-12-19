@@ -1,1 +1,0 @@
-# gpc license referencegpc.copyright <- function(){    RShowDoc("GPC_COPYRIGHT.txt", type = "txt", package = "constrainedKriging")}

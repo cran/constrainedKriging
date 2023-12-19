@@ -1,31 +1,34 @@
-2010-07-31  ChristophHofer
+2010-07-31  Christoph Hofer
 
 	* correction of backtransformation in the CKrige example (CKrige.Rd)
 
 
 2010-08-04 Christoph Hofer
 
-   * Punktkriging korrigiert so dass jetzt auch zwischen Messfehler und kleinräumiger Varianz unterschieden werden kann
+   * Punktkriging korrigiert so dass jetzt auch zwischen Messfehler und kleinr√§umiger Varianz unterschieden werden kann
 
-   * k in K geändert bei der Ausgabe der Punktkriging Vorhersagen
+   * k in K ge√§ndert bei der Ausgabe der Punktkriging Vorhersagen
 
 
 2011-01-13 Christoph Hofer
 
 	* warings werden erzeugt falls CK oder CMCK nicht existiert
-	* M für die rücktransformation korrigiert sqrt(dist)
+	* M f√ºr die r√ºcktransformation korrigiert sqrt(dist)
 
 
 2011-01-13 Christoph Hofer
 
 
-	* plot.preCKrige geändert (Zeile 48) (Hinweis von A. Papritz)
-	* Auswahl der zufälligen Farben war auf 155 beschränkt
+	* plot.preCKrige ge√§ndert (Zeile 48) (Hinweis von A. Papritz)
+	* Auswahl der zuf√§lligen Farben war auf 155 beschr√§nkt
  	* jetzt entspricht die Anzahl der Anzahl Polygone
 	* if statement im File f.bb.cov.one.configuration.R (Zeile 65) erweitert
-	* mit no.pix.in.poly[ t.element.index[ k, 1 ] ] == 0 &&	*  sa.polygons[ t.element.index[ k, 2 ] ] == T |	*  no.pix.in.poly[ t.element.index[ k, 2 ] ] == 0 &&	*  sa.polygons[ t.element.index[ k, 1 ] ] == T
-	* somit wir die Punkt-Punkt-Kovarianz zwischen Blöcken berechnet die keine Pixel enthalten aber 
-	* von der Fläche genug Gross wären (wurde vorher nicht berücksichtigt)
+	* mit no.pix.in.poly[ t.element.index[ k, 1 ] ] == 0 &&
+	*  sa.polygons[ t.element.index[ k, 2 ] ] == T |
+	*  no.pix.in.poly[ t.element.index[ k, 2 ] ] == 0 &&
+	*  sa.polygons[ t.element.index[ k, 1 ] ] == T
+	* somit wir die Punkt-Punkt-Kovarianz zwischen Bl√∂cken berechnet die keine Pixel enthalten aber 
+	* von der Fl√§che genug Gross w√§ren (wurde vorher nicht ber√ºcksichtigt)
 	
 
 2011-08-11 Christoph Hofer
@@ -76,7 +79,7 @@
 2012-12-23
 
 	* in version 0.1.9 all examples are ignored as the step
-	* -- running examples for arch … since their compilation
+	* -- running examples for arch ‚Ä¶ since their compilation
 	* take to much time
 
 2013-06-13
@@ -92,5 +95,81 @@
 	* can handel gpc.poly objects
 2013-10-02
 	* Package methods and spatialCovariance imported by the Namespace
-2015–04-22
-	* S3method(print , …) added in the Namesapce file also S3method(summary,…) and S3method(plot, ….)
+2015‚Äì04-22
+	* S3method(print , ‚Ä¶) added in the Namesapce file also S3method(summary,‚Ä¶) and S3method(plot, ‚Ä¶.)
+
+
+2023-01-24 Andreas Papritz  <papritz@retired.ethz.ch>
+
+* Class-preCKrigePoints.R revised definition of S4 class 'preCKrigePoints'
+* Class-preCKrigePolygons.R revised definition of S4 class 'preCKrigePolygons'
+* f.build.pixel.R (f.build.pixel) suppress warnings cause by intersect( gpc.pixel, polygons ) in function f.intersect.area
+* f.build.pixel.R (f.build.pixel) corrected error in statement sa.polygons[ no.pix.in.poly == 0 & sa.polygons == FALSE] <- TRUE
+* f.points.preCKrige.R (f.points.preCKrige) class queries by is()
+* f.polygons.CKrige.R (f.polygons.CKrige) class queries by is()
+* methods_CKrige.R file renamed, revised method definition for generic CKrige for classes preCKrigePolygons and preCKrigePoints
+* methods_preCKrige.R formally register S3 class 'covmodel' for method definitions for generic preCKrige
+
+
+
+2023-11-27 Andreas Papritz  <papritz@retired.ethz.ch>
+
+* covmodlist.R (covmodlist) changes in function covmodellist: elimination of duplicated entry for gencauchy, correction of number of parameters and bounds for circular, formatting of code, change of order of models
+* f.bbox.information.R code replaced by f.bbox.information.sfc.R (f.bbox.information.sfc)
+* f.bbox.information.sfc.R (f.bbox.information.sfc) implementation for simple feature geometry list-column (sfc object); slight revision of code; function returns now width and height of largest bounding box (and no longer maxima of bounding box widths and heights)
+* f.build.pixel.R code replaced by f.build.pixel.sfc.R (f.build.pixel.sfc)
+* f.build.pixel.sfc.R (f.build.pixel.sfc) implementation for simple feature geometry list-column (sfc) object 
+* f.centroid.polygon.R code no longer required
+* f.CorrelationFct.R (f.CorrelationFct) new function for computing point-point autocovariances (substitute for CovarianceFct{RandomFields})
+* f.covmat.support.R (f.covmat.support) substitution of function CovarianceFct{RandomsFields} by f.CorrelationFct
+* f.gpc.poly.R code no longer required
+* f.indicate.small.pred.locations.R code no longer required
+* f.intersect.area.R code no longer required
+* f.intersect.max.area.R code no longer required
+* f.pixconfig.R (f.pixconfig) code replaced by f.pixconfig.sfc.R (f.pixconfig.sfc)
+* f.pixconfig.sfc.R (f.pixconfig.sfc) implementation for simple feature geometry list-column (sfc) object and slight revision of code
+* f.pixelgrid.R code replaced by f.pixelgrid.sfc.R (f.pixelgrid.sfc)
+* f.pixelgrid.sfc.R (f.pixelgrid.sfc) implementation for simple feature geometry list-column (sfc object); slight revision of code
+* f.polygons.preCKrige.R (f.polygons.preCKrige) conversion of polygons and pixelgrid to sf objects
+and further revision of code
+* f.p.in.poly.R code no longer required
+* f.pp.cov.R (f.pp.cov, K) substitution of function CovarianceFct{RandomsFields} by f.CorrelationFct
+* f.preCKrige.check.and.test.R (f.preCKrige.check.and.test) minor changes and code re-formatting
+* methods_show_summary.R (print_preCKrigePolygons, print_preCKrigePoints) unquoted names of all functions, renamed functions print.preCKrigePolygons, print.preCKrigePointsargument to print_preCKrigePolygons and print_preCKrigePoints
+* warnings.R code no longer required
+* CITATION citation informations as bibentry, 
+* DESCRIPTION droping rgeos and RandomFields from Imports, new entry for sf in Imports
+* NAMESPACE importFrom entry for sf package, S3 methods registration for print.preCKrigePoints and preCKrigePolygons
+* covmodel.Rd revision and incorporation of description of covariance models taken from help page of function CovarianceFct of package RandomFields version 2.0.71
+
+
+2023-11-30 Andreas Papritz  <papritz@retired.ethz.ch>
+
+* src/init.c registration of C-function PointRectCov with R
+
+
+2023-12-13 Andreas Papritz  <papritz@retired.ethz.ch>
+
+* f.bb.cov.one.configuration.R (f.bb.cov.one.configuration) replacement for( ) by sapply(), slight simplification of  if() statements
+* f.CorrelationFct.R (f.CorrelationFct) correction of error for nugget model occurring with scale = 0
+* f.covmat.support.R (f.covmat.support) correction of error for nugget model occurring with scale = 0
+* f.points.CKrige.R (f.points.CKrige) function returns gls residuals now as vector (and not as one-column matrix); corrected computation of t.dist (lines 50-51)
+* f.polygoncovmat.R (f.polygoncovmat) optional parallelization, new arguments ncores and fork
+* f.polygons.CKrige.R (f.polygons.CKrige) function returns gls residuals now as vector (and not as one-column matrix); optional parallelization, new arguments ncores and fork
+* f.polygons.preCKrige.R (f.polygons.preCKrige) new arguments ncores and fork for f.polygons.preCKrige
+* f.pp.cov.R (K, f.pp.cov) correction of error for nugget model occurring with scale = 0
+* f.stopCluster.R (f.stopCluster) new function for stopping parallel computations
+* methods_CKrige.R (CKrige.polygons) new arguments ncores and fork for f.polygons.CKrige
+* methods_preCKrige.R (preCKrige.polygonsDF, preCKrige.polygons) new arguments ncores and fork for f.polygons.preCKrige 
+
+
+2023-12-15 Andreas Papritz  <papritz@retired.ethz.ch>
+
+* f.preCKrige.check.and.test.R (f.preCKrige.check.and.test) f.preCKrige.check.and.test
+* f.polygons.preCKrige.R (f.polygons.preCKrige) deleted set.seed()
+* plot.preCKrigePolygons.R (plot.preCKrigePolygons) changes of par() complying with CRAN requirements
+* f.polygoncovmat.R (f.polygoncovmat) no changes of options("error)
+* f.polygons.CKrige.R (f.polygons.CKrige) no changes of options("error)
+* covmodel.Rd, meuse.blocks.Rd \dontrun{} statements omitted* preCKrige.Rd, CKrige.Rd, plot.preCKrigePolygons.Rd  \dontrun{} statements replaced by \donttest{}
+* ckcolors.Rd new help page for function ck.colors()
+* internal.Rd new help page for exported interal functions

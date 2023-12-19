@@ -27,6 +27,8 @@
 // Author: Christoph Hofer
 // Datum: Dezember 2009
 // geändert am 29-01-2010, ch
+// 2023-01-24 A. Papritz elimination of unnneeded variable setlb, setub
+
 #include <stdio.h>
 #include <stdlib.h> 
 #include <R.h>
@@ -117,7 +119,7 @@ void PointRectCov(
 	// i= Laufvariable # Cov-Modelle, j = Laufvariable # Integrationsgrenzen (1,2, oder 4), 
 	//modnr = Nummer der Kovarianzfunktion, imod = Laufvariable Anzahl Kovarianzmodelle
 	
-	double temp_cov, cov, res, setlb, setub, rect_area, pcxdiff, pcydiff;
+	double temp_cov, cov, res, rect_area, pcxdiff, pcydiff;
 	//int *neval = NULL, *ier = NULL, *lenw= NULL, *last=NULL;  
 	//int *iwork= NULL;
 	//double *work = NULL;
@@ -281,7 +283,7 @@ void PointRectCov(
 				(*p_pcp).cp =  param_new + imodr + 1;
 				break;
 				
-			case 7: // cauchytbm
+			case 7: // circular
 				
 				f_cov = f_cov_circular;
 				(*p_pcp).cp =  param_new + imodr + 1;
@@ -293,7 +295,7 @@ void PointRectCov(
 				(*p_pcp).cp =  param_new + imodr + 1;
 				break;
 				
-			case 9: // constant
+			case 9: // cubic
 				
 				f_cov = f_cov_cubic;
 				(*p_pcp).cp =  param_new + imodr + 1;
@@ -353,25 +355,25 @@ void PointRectCov(
 				(*p_pcp).cp =  param_new + imodr + 1;
 				break;
 				
-			case 19: // lgd1
+			case 19: // power
 				
 				f_cov = f_cov_power;
 				(*p_pcp).cp =  param_new + imodr + 1;
 				break;
 				
-			case 20: // lgd1
+			case 20: // wave
 				
 				f_cov = f_cov_wave;
 				(*p_pcp).cp =  param_new + imodr + 1;
 				break;
 				
-			case 21: // lgd1
+			case 21: // qexponential
 				
 				f_cov = f_cov_qexponential;
 				(*p_pcp).cp =  param_new + imodr + 1;
 				break;
                 
-            case 22: // lgd1
+      case 22: // whittle
 				
 				f_cov = f_cov_whittle;
 				(*p_pcp).cp =  param_new + imodr + 1;

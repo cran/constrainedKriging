@@ -1,3 +1,10 @@
+% 2023-12-15 A. Papritz correction of spelling errors and revision of text
+% cd R.user.home/constrainedKriging/constrainedKriging_02-7/pkg/man/
+% R CMD Rdconv -t html -o bla.html preCKrige.Rd ; open bla.html;
+% R CMD Rd2pdf --force preCKrige.Rd;
+% hunspell -d en_GB-ise,en_GB-ize,en_GB-large -t -i mac  preCKrige.Rd
+% 2023-11-23 A. Papritz correction of example preCK_2
+% 2023-12-09 A. Papritz correction of spelling errors and minor revision of
 \name{preCKrige}
 \docType{methods}
 \alias{preCKrige-methods}
@@ -10,269 +17,357 @@
 \alias{preCKrige,SpatialPointsDataFrame,ANY,covmodel-method}
 \alias{preCKrige,SpatialPolygons,ANY,covmodel-method}
 \alias{preCKrige,SpatialPolygonsDataFrame,ANY,covmodel-method}
-\title{Spatial Variance-Covariance Matrices for Points and Polygons of any Shape}
-%%
-\description{The function \code{preCKrige} provides (approximated) spatial
-variance-covariance matrices for user defined sets of polygons (blocks) of
-any shape or points for two-dimensional isotropic random fields.  The
-polygon (block) areas of a set of polygons (polygon neighbourhood
-configuration) are approximated by pixels and the block-block covariances
-are approximated by averaging the pixel covariances of the approximated
-polygon (block) areas.
 
-The returned object of \code{preCKrige} is, in general, needed
-by \code{\link{CKrige}} for spatial point or block interpolation by
-constrained, covariance-matching constrained or universal (external drift)
-kriging.}
+\title{Spatial Variance-Covariance Matrices for Sets of Points and Polygons}
+%%
+\description{The function \code{preCKrige} computes (approximated) spatial
+variance-covariance matrices for user-defined sets of points or polygons
+(blocks) of any shape for two-dimensional isotropic random fields.  The
+areas of a set of polygons (polygon neighbourhood configuration) are
+approximated by pixels and the block-block covariances are approximated by
+averaging covariances between the pixels used to approximate the polygons.
+
+The object returned by \code{preCKrige} is needed by \code{\link{CKrige}}
+for computing spatial point or block predictions by constrained,
+covariance-matching constrained or universal (external drift) Kriging.
+}
 %%
 \usage{
-preCKrige( newdata, neighbours, model, \ldots )
+preCKrige(newdata, neighbours, model, \ldots)
 %
 \S4method{preCKrige}{SpatialPoints,ANY,covmodel}(newdata, neighbours, model)
 %
 \S4method{preCKrige}{SpatialPointsDataFrame,ANY,covmodel}(newdata, neighbours, model)
 %
 \S4method{preCKrige}{SpatialPolygons,ANY,covmodel}(newdata, neighbours, model,
-pwidth = 0, pheight = 0, napp = 1)
+  pwidth = 0, pheight = 0, napp = 1, ncores = 1L,
+  fork = !identical( .Platform[["OS.type"]], "windows"))
 %
-\S4method{preCKrige}{SpatialPolygonsDataFrame,ANY,covmodel}(newdata, neighbours, model,
-pwidth = 0, pheight = 0, napp = 1)
-}%
+\S4method{preCKrige}{SpatialPolygonsDataFrame,ANY,covmodel}(newdata, neighbours,
+  model, pwidth = 0, pheight = 0, napp = 1, ncores = 1L,
+  fork = !identical( .Platform[["OS.type"]], "windows"))
+}
+
+%% arguments
 \arguments{
-%% newdata
-\item{newdata}{either an object of the classes
-\dQuote{\code{SpatialPoints}} or \cr \dQuote{\code{SpatialPointsDataFrame}}
-that contains the point coordinates and if necessary additional point
-information (covariates) stored in the \code{data.frame} of the \code{SpatialPointsDataFrame} object,
-or an object of the classes \cr \dQuote{\code{SpatialPolygons}} or \dQuote{\code{SpatialPolygonsDataFrame}}
-with the coordinates of the polygons (block) and if necessary additional polygon information
-(covariates) stored in the data frame of the \code{SpatialPointsDataFrame} object.}
-%%% neighbours
-\item{neighbours}{list of n integer vectors, where n = number
-of points if \code{newdata} is an object of the classes
-\dQuote{\code{SpatialPoints}} or \dQuote{\code{SpatialPointsDataFrame}} or n
-= number of polygons (blocks) if \code{newdata} is an object of the classes
-\dQuote{\code{SpatialPolygons}} or \dQuote{\code{SpatialPolygonsDataFrame}}. The ith list
-component define the neighbours of the ith point or polygon (block) in
-\code{newdata}.  If \code{newdata} is an object of the classes
-\dQuote{\code{SpatialPolygons}} or \cr \dQuote{\code{SpatialPolygonsDataFrame}}
-each list component contains the list indices of the neighbour polygons
-of the polygon list \code{newdata@polygons}.  If \code{newdata} is an object
-of the classes \dQuote{\code{SpatialPoints}} or \cr \dQuote{\code{SpatialPointsDataFrame}}
-each list component contains the row indices of the neighbour points from the
-point-coordinates matrix.  The ith list component is set to
-\code{integer(0)} if the ith polygon or point have no (defined) neighbours.
-By default, the points or polygons have no neighbours.  See the second
-example where the function \code{poly2nb} of the \pkg{spedp} package is
-used to build such a neighbours list.}
-%%& model
-\item{model}{object of class \dQuote{\code{covmodel}}.  The object contains
-the parameter of the isotropice covariance
-function, generated by the function \code{\link{covmodel}}.}
-%%
-\item{\dots}{further arguments if \code{newdata} is of class
-\dQuote{\code{SpatialPolygons}} or \cr \dQuote{\code{SpatialPolygonsDataFrame}}}
-%%pwidth
-\item{pwidth}{positive numeric scalar, defines the width of the pixels which are used
-to approximate the polygon (block) area.}
-%% pheight
-\item{pheight}{positive numeric scalar, defines the height of the pixels which are
-used to approximate the polygon (block) area.}
-%% napp
-\item{napp}{positive integer scalar.  \code{napp} > 1 reduces the
-block-block variance-covariance approximation error.
-By default, \code{napp} = 1.  See details.}
-}% end arguments
+
+  %% newdata
+  \item{newdata}{either an object of the class
+  \dQuote{\code{SpatialPointsDataFrame}}
+  or \dQuote{\code{SpatialPoints}} that contains the coordinates of the
+  prediction points and optionally additional information (covariates) stored
+  in the \code{data} slot of the \code{SpatialPointsDataFrame},
+  or an object of the class \dQuote{\code{SpatialPolygonsDataFrame}} or
+  \dQuote{\code{SpatialPolygons}}
+  with the coordinates of the polygons (blocks) for which predictions are
+  computed and optionally additional information (covariates) stored in the
+  \code{data} slot of the
+  \code{SpatialPolygonsDataFrame}.}
+
+  %%% neighbours
+  \item{neighbours}{a list of length \var{n} with integer vectors as
+  components.  \var{n} is equal to the number of points if
+  \code{newdata} is an object of class
+  \dQuote{\code{SpatialPointsDataFrame}} or
+  \dQuote{\code{SpatialPoints}} or equal to number of polygons (blocks)
+  if \code{newdata} is an object of class
+  \dQuote{\code{SpatialPolygonsDataFrame}} or
+  \dQuote{\code{SpatialPolygons}}.
+
+  The \var{i}th list component defines the neighbours of the \var{i}th
+  point or \var{i}th polygon (block) in \code{newdata}, which form
+  jointly with the \var{i}th point or polygon the so-called \emph{point}
+  or \emph{polygon neighbourhood configuration}.  If \code{newdata} is
+  an object of class \dQuote{\code{SpatialPolygonsDataFrame}} or
+  \dQuote{\code{SpatialPolygons}} the \var{i}th list component contains
+  the indices of the neighbouring polygons for the \var{i}th polygon.
+  If \code{newdata} is an object of class \dQuote{\code{SpatialPoints}}
+  or \dQuote{\code{SpatialPointsDataFrame}} the \var{i}th list component
+  contains the row indices of the neighbouring points in the point
+  coordinate matrix.  The \var{i}th list component is set to
+  \code{integer(0)} if the \var{i}th polygon or \var{i}th point have no
+  (defined) neighbours.  By default, the points or polygons have no
+  neighbours.
+
+  See the second example below where the function \code{poly2nb} of the
+  package \pkg{spdep} is used to build a list of neighbours for target
+  polygons of the  data set \code{\link{meuse.blocks}}.}
+
+  %%& model
+  \item{model}{an object of class \dQuote{\code{covmodel}}.  The object
+  contains the parameters of the isotropic covariance function,
+  generated by the function \code{\link{covmodel}}.}
+  %%
+  \item{\dots}{further arguments if \code{newdata} is of class
+  \dQuote{\code{SpatialPolygonsDataFrame}} or\cr
+  \dQuote{\code{SpatialPolygons}}.}
+
+  %%pwidth
+  \item{pwidth}{a positive numeric scalar, defines the width of the
+  pixels used to approximate the polygon (block) areas.}
+
+  %% pheight
+  \item{pheight}{a positive numeric scalar, defines the height of the
+  pixels used to approximate the polygon (block) areas.}
+
+  %% napp
+  \item{napp}{a positive integer scalar.  \code{napp} > 1 reduces the
+  block-block variance-covariance approximation error.  By default,
+  \code{napp} = 1, see \emph{Details.}}
+
+  %% ncores
+  \item{ncores}{a positive integer scalar with the number of CPUs to
+  use for parallel computations.}
+
+  %% fork
+  \item{fork}{a logical scalar to control whether parallel
+  computations are done by forking using \code{\link[parallel]{mclapply}}
+  (non-windows OSes) or by socket clusters using
+  \code{\link[parallel]{parLapply}} (windows OS).}
+
+}
+% end arguments
 %
 %
 %% details
-\details{
-If the objects for \code{newdata} are of the classes
-\dQuote{\code{SpatialPolygons}} or \cr \dQuote{\code{SpatialPolygonsDataFrame}}, \code{preCKrige} searches the
-polygon (block) neighbourhood configuration (defined by the argument
-\code{neighbours}) with the largest bounding box and generates a pixel gird
-with the same area as the largest bounding box.  Subsequently, the
-covariance matrix of this pixels is calculated by using the
+\details{ If the object \code{newdata} is of class
+\dQuote{\code{SpatialPolygonsDataFrame}} or
+\dQuote{\code{SpatialPolygons}} then\cr \code{preCKrige} searches the
+polygon neighbourhood configuration (defined by \code{neighbours})
+with the largest bounding box and generates a pixel grid that
+completely covers the largest bounding box.  Subsequently, the
+covariance matrix of this set of pixels is calculated by the
 \pkg{spatialCovariance} package and the polygon (block) areas of each
-polygon neighbourhood configuration are approximated by the pixels.
-Finally, the block-block covariances are approximated by averaging the
-pixel covariances of the approximated polygon (block) areas.
+polygon neighbourhood configuration are approximated by intersecting
+the polygons with the shifted pixel grid, which yields a pixel
+representation of the polygon neighbourhood configuration.  Finally,
+the block-block covariances of the polygons are approximated by
+averaging the covariances of the pixel representation of the
+polygon neighbourhood configuration.
 
-By default, \code{napp} = 1 means that the approximation of the block-block
-variance-covariance matrix for each polygon neighbourhood configuration is
-based on one specific polygon (block) area approximation defined by one
-grid of pixels.  If \code{napp} > 1 the approximation of the block-block
-variance-covariance matrix for one polygon neighbourhood configuration is
-based on the mean of \code{napp} approximated block-block
-variance-covariance matrices in order to reduce the approximation error.
-Each of the \code{napp} block-block variance-covariance approximations are
-based on a new, randomly shifted pixel gird which results each time in a new
-block area approximation. Large values of the argument \code{napp}
-increases the computation time.
+By default, \code{napp = 1}, which means that the approximation of the
+block-block variance-covariance matrix for each polygon neighbourhood
+configuration is computed just once.  If \code{napp} > 1 the
+approximation of the block-block variance-covariance matrix for one
+polygon neighbourhood configuration is based on the mean of
+\code{napp} repetitions of the approximation to reduce the
+approximation error.  Each of the \code{napp} block-block
+variance-covariance approximations are based on a new, randomly
+shifted pixel gird which results each time in a new pixel
+representation of the polygon neighbourhood configuration.  Large
+values of the argument \code{napp} increases the computation time.
 
 There is a plot method \code{\link{plot.preCKrigePolygons}} for
-\code{preCKrige} output objects of the class
-\dQuote{\code{preCKrige.polygons}} to visually control the polygon (block)
-area approximation by the pixels.
-}
+\code{preCKrige} output objects of class\cr
+\dQuote{\code{preCKrigePolygons}} to visually control the polygon
+(block) area approximation by the pixels.  }
+% end details
 %%
 \note{
 A polygon (block) is treated as point if the polygon area is smaller than
-the (defined) pixel area or if all pixel centroid of the generated pixel grid
+the (defined) pixel area or if all pixel centroids of the generated pixel grid
 lie outside the polygon (block) area.  If a pixel centroid lies
 inside a polygon that has a smaller area than a pixel, the pixel is
-allocated to the polygon (block) by which it share the largest area.
+allocated to the polygon (block) by which it shares the largest area.
 
-The point-point covariances are calculated via the
-\code{\link{CovarianceFct}} of the \pkg{RandomFields} package and the
-point-block covariances are calculated in C.
-}% end details
-%
+The point-point correlations are calculated via the internal function
+\code{CorrelationFct} (this function implements a subset of the
+covariance models available previously in the function
+\code{CovarianceFct} of the archived package \pkg{RandomFields},
+version 2.0.71) and the point-block covariances are calculated by the C
+function \code{PointRectCov} of the package.}
+% end note
+
 %% value
-\value{\code{preCKrige} returns a S4 object, either of class
-\dQuote{\code{preCKrigePolygons}} if the object for the argument
-\code{newdata} is of the class \dQuote{\code{SpatialPolygons}} or
-\dQuote{\code{SpatialPolygonsDataFrame}} or an S4 object of the class
-\dQuote{\code{preCKrigePoints}} if the object for the argument \code{newdata} is
-of the class \dQuote{\code{SpatialPoints}} or
-\dQuote{\code{SpatialPointsDataFrame}} ( see \code{\linkS4class{preCKrigePolygons}}
-or \code{\linkS4class{preCKrigePoints}} for the general structures of these
-two classes).
+\value{\code{preCKrige} returns an S4 object, either of class
+\dQuote{\code{preCKrigePolygons}} if
+\code{newdata} is of class\cr \dQuote{\code{SpatialPolygons}} or
+\dQuote{\code{SpatialPolygonsDataFrame}} or an S4 object of class
+\dQuote{\code{preCKrigePoints}} if
+\code{newdata} is of class \dQuote{\code{SpatialPoints}} or
+\dQuote{\code{SpatialPointsDataFrame}}.
 
-Notation:
-
-n = total number of polygons or points \cr
-i = 1, \ldots, n \cr
-m = 1 + number of (defined) neighbours of the ith polygon \cr
-rpix = number of pixel grid rows \cr
-cpix = number of pixel grid columns \cr
-npix = rpix * cpix \cr
-
-%%% for preCKrigePoints
-An object of the class \dQuote{\code{preCKrigePoints}} contains the following slots:
-
-\item{covmat}{list, length = n, of point-point covariance matrices.}
-\item{posindex}{list of numeric vectors, length = n, ith list
-component contains a vector with the  row indices of the m-1 neighbours of the ith point.}
-\item{model}{object of the class \dQuote{\code{covmodel}} with the parameter of the used covariance function.}
-\item{data}{is the data frame of the \code{SpatialPointsDataFrame}
-object.  This data frame is used to build the target points design
-matrix for spatial interpolation by the \code{\link{CKrige}} function.
-\code{data} is empty, dim(data) = (0,0), if \code{newdata} is an object
-of the class \dQuote{\code{SpatialPoints}}.}
-\item{coords}{matrix, dim = (n, 2) with the coordinates of the points.}
-
-An object of the class \dQuote{\code{preCKrigePolygons}} contains the
-following slots (values are accessible by the @ operator):
-
-\item{covmat}{list of matrices, length = n, ith list
-component contains the approximated block-block covariance matrix of the
-ith polygon and its neighbourhood configuration.}
-\item{se.covmat}{list of matrices, length = n, ith list
-component contains a matrix with the standard errors of the approximated
-block-block covariances of the ith polygon and its neighbourhood
-configuration, values are
-\code{NaN} if \code{preCKrige} argument \code{napp} = 1.  See details.}
-\item{pixconfig}{list of lists, length = n, ith list component
-contains at list with the information about the pixel used for the
-covariance approximation of the ith polygon and its neighbours.  The list
-components of \code{pixconfig} are described below.}
-\item{pixcovmat}{matrix, dim = (npix, npix), covariance matrix of the
-pixels.}
-\item{model}{object of the class \dQuote{\code{covmodel}} with the parameter
-of the used covariance function.}
-\item{data}{is the data frame of the \code{SpatialPolygonsDataFrame}
-object.  This data frame is used to build the target polygons (blocks)
-design matrix for spatial interpolation by the
-\code{\link{CKrige}} function.  \code{data} is empty, dim(data) = (0, 0),
-if \code{newdata} is an object of the class
-\dQuote{\code{SpatialPolygons}}.}
-\item{polygons }{SpatialPolygons object.  A list (length = n) with the
-polygons of the \code{newdata} object.}\cr
-
-The slot \code{pixconfig} is a list, length( \code{pixconfig} ) = n, of
-lists, each of length = 10, with information about the pixel grid used to
-approxiamte the polygon (block) areas. The ith list of
-\code{pixconfig} contains the following 10 components:
-
-
-\item{pixcenter}{is a matrix, dim = (m,2) with the coordinates of the
-pixels centroids of the pixel grid for the ith polygon
-neighbourhood configuration.  The dimension of the matrix is \code{2napp}}
-\item{rowwidth}{\code{preCKrige} input argument \code{pheight}.}
-\item{colwidth}{\code{preCKrige} input argument \code{pwidth}}
-\item{nrows}{positive numeric scalar, number of rows of the pixel grid.}
-\item{ncols}{positive numeric scalar, number of columns of the pixel grid.}
-\item{no.pix.in.poly}{is a numeric vector, length = m , each number
-indicates by how
-many pixels a polygon of the ith polygon configuratioin is approximated.}
-\item{sa.polygons}{logical vector, length = m, TRUE means that
-the ith polygon is treated as point and FALSE means that the polygon is
-approximated by pixels.  See section Note for more details.}
-\item{polygon.centroids}{is a matrix, dim = (m,2) with the coordinates of
-the polygon centroids from the ith
-polygon neighbourhood configuration.}
-\item{posindex}{is a numeric vector, length = m, that contains the list
-indices of the ith polygon and its neighbours
-defined in the ith list component of the \code{neighbours} argument of the
-\code{preCKrige} function.}
-\item{pix.in.poly}{is a binary matrix, dim = (npix, m).
-\code{pix.in.poly[k,l] = 1} indicate that the centroid of the kth pixel
-lies in the area of the lth polygon and \cr \code{pix.in.poly[k,l] = 0}
-indicate that the kth pixel centroid does not lie in the area of the lth
-polygon.}
-}% end value
-\references{
-See main help page of the \pkg{\link{constrainedKriging}} package.}
-\author{Christoph Hofer, \email{christoph.hofer@alumni.ethz.ch}
+\emph{Notation}:
+\tabular{ll}{
+  \eqn{n} \tab number of polygons or points in \code{newdata},
+               \var{i} = 1, \ldots, \eqn{n}\cr
+  \eqn{m_i} \tab size of point or polygon neighbourhood configuration \cr
+  \tab \eqn{m_i} = 1 + number of (defined) neighbours of the \var{i}th point
+               or \var{i}th polygon \cr
+  \eqn{r_{\mathrm{pix}}}{r_pix} \tab number of pixel grid rows \cr
+  \eqn{c_{\mathrm{pix}}}{c_pix}  \tab number of pixel grid columns \cr
+  \eqn{n_{\mathrm{pix}}}{n_pix}  \tab number of pixels in pixel grid
+     \eqn{n_{\mathrm{pix}} = r_{\mathrm{pix}} \cdot c_{\mathrm{pix}}}{n_pix = r_pix * c_pix} \cr
 }
+
+
+%%% preCKrigePoints
+An object of class \dQuote{\code{preCKrigePoints}} contains the
+following slots:
+
+\item{covmat}{a list of length \eqn{n}, the \eqn{i}th list component
+contains the point-point covariance matrix of the \eqn{i}th prediction
+point and its neighbours, i.e. of the \eqn{i}th point neighbourhood
+configuration.}
+
+\item{posindex}{a list of length \eqn{n}, the \eqn{i}th list component
+contains a vector with the row indices of the \eqn{m_i - 1} neighbours
+in the \eqn{i}th point neighbourhood configuration.}
+
+\item{model}{an object of class \dQuote{\code{covmodel}} with the
+parameters of the used covariance function.}
+
+\item{data}{a data frame, which is the \code{data} slot of the
+\code{SpatialPointsDataFrame} object.  This data frame is used to
+build the design matrix of the prediction points by the
+\code{\link{CKrige}} function.  \code{data} is empty with
+\code{dim(data)} = (0, 0) if \code{newdata} is an object of class
+\dQuote{\code{SpatialPoints}}.}
+
+\item{coords}{a matrix with \code{dim(coords)} = (\eqn{n}, 2) with the
+coordinates of the prediction points.}
+
+
+%%% preCKrigePolygons
+An object of class \dQuote{\code{preCKrigePolygons}} contains the
+following slots:
+
+\item{covmat}{a list of length \eqn{n}, the \eqn{i}th list component
+contains the approximated block-block covariance matrix of the
+\eqn{i}th polygon and its neighbours, i.e. of the \eqn{i}th polygon
+neighbourhood configuration.}
+
+\item{se.covmat}{a list of length \eqn{n}, the \eqn{i}th list
+component contains a matrix with the standard errors of the
+approximated block-block covariances of the \eqn{i}th polygon
+neighbourhood configuration. Values are equal to \code{NaN} for
+argument \code{napp = 1}, see \emph{Details}.}
+
+\item{pixconfig}{a list of lists of length \eqn{n}, the \eqn{i}th list
+component contains a list with the information about the pixels used
+for the covariance approximation of the \eqn{i}th polygon
+neighbourhood configuration.  The components of \code{pixconfig} are
+described below.}
+
+\item{pixcovmat}{a matrix, \code{dim(matrix)} =
+(\eqn{n_{\mathrm{pix}}}{n_pix}, \eqn{n_{\mathrm{pix}}}{n_pix} ), with
+the covariance matrix of the pixels.}
+
+\item{model}{an object of class \dQuote{\code{covmodel}} with the
+parameters of the used covariance function.}
+
+\item{data}{a data frame which is the \code{data} slot of the
+\code{SpatialPolygonsDataFrame} object.  This data frame is used to
+build the design matrix of the prediction polygons by the
+\code{\link{CKrige}} function.  \code{data} is empty with
+\code{dim(data)} = (0, 0) if \code{newdata} is an object of class
+\dQuote{\code{SpatialPolygons}}.}
+
+\item{polygons}{a \code{SpatialPolygons} object.  A list of length
+\eqn{n} with the polygons of the \code{newdata} object.}
+
+
+The \eqn{i}th component of \code{pixconfig} is a list with the
+following 10 components:
+
+\item{pixcenter}{a matrix with \code{dim(pixcenter)} =
+(\eqn{n_{\mathrm{pix}}}{n_pix}, 2) with the coordinates of the pixels
+centroids for the \eqn{i}th polygon neighbourhood configuration.}
+
+\item{rowwidth}{\code{preCKrige} input argument \code{pheight}.}
+
+\item{colwidth}{\code{preCKrige} input argument \code{pwidth}.}
+
+\item{nrows}{a numeric scalar with number of rows
+\eqn{r_{\mathrm{pix}}}{r_pix} of the pixel grid.}
+
+\item{ncols}{a numeric scalar with number of columns
+\eqn{c_{\mathrm{pix}}}{c_pix} of the pixel grid.}
+
+\item{no.pix.in.poly}{a numeric vector of length \eqn{m_i}, each
+number indicates by how many pixels a polygon of the \eqn{i}th polygon
+configuration is approximated.}
+
+\item{sa.polygons}{a logical vector of length \eqn{m_i}, TRUE means
+that the \eqn{i}th polygon is treated as a point because its area is
+smaller than the area of a pixel, and FALSE means that the polygon is
+approximated by pixels, see \emph{Note} for more details.}
+
+\item{polygon.centroids}{a matrix with \code{dim(polygon.centroids)} =
+(\eqn{m_i}, 2) with the coordinates of the polygon centroids of the
+\eqn{i}th polygon neighbourhood configuration.}
+
+\item{posindex}{an integer vector of length \eqn{m_i} with indices of
+the \eqn{i}th polygon and its neighbours as defined by the argument
+\code{neighbours}.}
+
+\item{pix.in.poly}{is a binary matrix with \code{dim(pix.in.poly)} =
+(\eqn{n_{\mathrm{pix}}}{n_pix}, \eqn{m_i}).  \code{pix.in.poly[k, j] = 1}
+indicates that the centroid of the \var{k}th pixel lies in the
+\var{j}th polygon, and \code{pix.in.poly[k, j] = 0} indicates that the
+\var{k}th pixel centroid does not lie in the \var{j}th
+polygon.} }
+
+% end value
+
+\references{
+Hofer, C. and Papritz, A. (2011).  constrainedKriging: an R-package
+for customary, constrained and covariance-matching constrained point
+or block Kriging.  \emph{Computers & Geosciences}. \bold{37}, 1562--1569,
+\doi{10.1016/j.cageo.2011.02.009}
+}
+
+
+\author{
+Christoph Hofer, \email{christoph.hofer@alumni.ethz.ch}
+}
+
 \seealso{ \code{\link{CKrige}} }
 
 \examples{
-\dontrun{
+\donttest{
 ### first example
 ### load data
-
-data(meuse,meuse.blocks)
+data(meuse, package = "sp")
+data(meuse.blocks)
 
 ### plot blocks
 plot(meuse.blocks)
 
-### compute the approximated block variance of each block in  meuse.blocks
-### without the definition of neighbours blocks (default) for an exponential
-### covariance function without a measurement error, a nugget  = 0.15 (micro
-### scale white noise process) and a scale parameter = 192.5
-preCK_1  <- preCKrige(newdata = meuse.blocks, model = covmodel(modelname =
-              "exponential", mev = 0, nugget = 0.05, variance = 0.15,
-	      scale = 192.5), pwidth = 75, pheight = 75)
+### compute the approximated block variance of each block in meuse.blocks
+### without any neighbouring blocks (default, required for in universal
+### and constrained Kriging) for an exponential covariance function without
+### a measurement error, a nugget  = 0.15 (micro scale white noise process),
+### a partial sill variance = 0.15 and a scale parameter = 192.5
+### approximation of block variance by pixel of size 75m x 75m
+preCK_1 <- preCKrige(newdata = meuse.blocks, model = covmodel(modelname =
+    "exponential", mev = 0, nugget = 0.05, variance = 0.15,
+    scale = 192.5), pwidth = 75, pheight = 75)
 
-### plot block approximation of block 59
+### plot block approximation for block 59
 plot(preCK_1, 59)
 
 ### second example
 ### define neighbours by using the poly2nb function
 ### of the spdep package
-if(require(spdep))
-{
-neighbours <- poly2nb(meuse.blocks)
+if(!requireNamespace("spdep", quietly = TRUE)){
+  stop("install package spdep to run example")
+}
+neighbours <- spdep::poly2nb(meuse.blocks)
 class(neighbours)
-### neighbours should be an object of the class "list"
+### neighbours should be an object of class "list"
 class(neighbours) <- "list"
 ### compute the approximated block variance-covariance
 ### matrices of each block in meuse.blocks without the
 ### defined block neighbours
 preCK_2 <- preCKrige(newdata = meuse.blocks, neighbours = neighbours,
-    model = covmodel("exponential", 0.05, 0.15, scale = 192.5),
-    pwidth = 75, pheight = 75)
+  model = covmodel("exponential", nugget = 0.05, variance = 0.15,
+    scale = 192.5), pwidth = 75, pheight = 75)
 
 ### plot block approximation of block 59 and its
 ### block neighbours
 plot(preCK_2, 59)
 }
-if(!require(spdep))
-{
-cat("Please, install the package spdep to execute this example.\n")
 }
-}
-}
+
 \keyword{methods}
