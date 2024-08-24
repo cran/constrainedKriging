@@ -1,4 +1,4 @@
-% 2023-12-15 A. Papritz correction of spelling errors and major revision of
+% 2024-01-25 A. Papritz correction of spelling errors and major revision of
 % text, extended examples
 % cd R.user.home/constrainedKriging/constrainedKriging_02-7/pkg/man/
 % R CMD Rdconv -t html -o bla.html internal.Rd ; open bla.html;
@@ -9,7 +9,7 @@
 \alias{f.point.block.cov}
 \alias{K}
 
-\title{Internal functions exported for use in dependent packages}
+\title{Internal Functions Exported For Use In Dependent Packages}
 
 \description{The internal functions \code{K} and \code{f.point.block.cov}
 are not meant to be called by users directly.  They are exported because
@@ -39,8 +39,8 @@ coordinates of the observations.}
 \value{
 \code{K} computes a vector with autocorrelations.
 
-\code{f.point.block.cov} computes a (\var{n} \eqn{times}{x} \var{m} )
-matrix with the autocovariances between \var{n} observations and 
+\code{f.point.block.cov} computes a (\var{n} \eqn{\times}{x} \var{m} )
+matrix with the autocovariances between \var{n} observations and
 \var{m} prediction target blocks.
 }
 

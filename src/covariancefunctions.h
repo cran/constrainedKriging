@@ -394,13 +394,14 @@ double f_cov_cauchytbm( double x, double *covpar)
 // *(covpar + 1) = Rangeparameter
 // x = lad Distanz
 // ***************************************************
+// 2024-08-24 A. Papritz constant PI substituted by M_PI
 double f_cov_circular( double x, double *covpar)
 {
 	double circular_cov;
 	
 	if( ( x / (*(covpar + 1)) ) >= 0 && ( x / (*(covpar + 1)) ) <= 1)
 	{
-		circular_cov = *(covpar + 0) * ( 1 - 2/PI * ( x /( *(covpar + 1)) * sqrt(1- pow( x/(*(covpar + 1)), 2 ) ) + asin( x / ( *(covpar + 1) ) ) ) );
+		circular_cov = *(covpar + 0) * ( 1 - 2/M_PI * ( x /( *(covpar + 1)) * sqrt(1- pow( x/(*(covpar + 1)), 2 ) ) + asin( x / ( *(covpar + 1) ) ) ) );
 	}
 	else
 	{

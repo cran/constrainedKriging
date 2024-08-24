@@ -172,4 +172,11 @@ and further revision of code
 * f.polygons.CKrige.R (f.polygons.CKrige) no changes of options("error)
 * covmodel.Rd, meuse.blocks.Rd \dontrun{} statements omitted* preCKrige.Rd, CKrige.Rd, plot.preCKrigePolygons.Rd  \dontrun{} statements replaced by \donttest{}
 * ckcolors.Rd new help page for function ck.colors()
-* internal.Rd new help page for exported interal functions
+* internal.Rd new help page for exported internal functions
+
+
+2024-08-24 Andreas Papritz  <papritz@retired.ethz.ch>
+
+* covariancefunctions.h (f_cov_circular) constant PI substituted by M_PI
+
+
