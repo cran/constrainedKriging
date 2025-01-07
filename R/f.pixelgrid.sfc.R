@@ -14,6 +14,9 @@ f.pixelgrid.sfc <- function(
 
 ## 2023-11-23 A. Papritz implementation for simple feature geometry
 ##                       list-column (sfc object); slight revision of code;
+## 2024-12-26 A. Papritz issues warning message if pixel grid has less than 
+##                       2 pixels in either of the two directions
+ 
 {
 
   ## finden der maximalen boundingbox
@@ -31,6 +34,9 @@ f.pixelgrid.sfc <- function(
   # compute number of nodes of pixel grid
   t.mesh.n.col <- ceiling( t.x.range / pixel.x.width )
   t.mesh.n.row <- ceiling( t.y.range / pixel.y.width )
+  
+  if( t.mesh.n.col < 2L ) warning( "pixel grid has less than 2 pixels in x-direction" )
+  if( t.mesh.n.row < 2L ) warning( "pixel grid has less than 2 pixels in y-direction" )
 
   # generation of pixelgrid by precompute{spatialCovariance}
   pixgridInfo <- precompute(

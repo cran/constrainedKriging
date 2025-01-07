@@ -180,3 +180,9 @@ and further revision of code
 * covariancefunctions.h (f_cov_circular) constant PI substituted by M_PI
 
 
+2024-12-26 Andreas Papritz  <papritz@retired.ethz.ch>
+
+* f.pixelgrid.sfc.R (f.pixelgrid.sfc) issues warning message if pixel grid has less than 2 pixels in either of the two directions
+ 
+
+

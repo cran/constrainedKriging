@@ -1,4 +1,4 @@
-820dcc4c649ed416c5fb207494b4257e *DESCRIPTION
+399cc63d69a9dacc6535a09f2f8ffbf9 *DESCRIPTION
 d9c2b283e3d86ebc4ac3c3385bba3209 *NAMESPACE
 bbd3ff83b84c3f6084998a58914bebe4 *R/AAA.R
 e8a7847acaefd3bc35ac7f8e20fdefcb *R/Class-preCKrigePoints.R
@@ -16,7 +16,7 @@ f728ad04b0ae298d3e33cec0735fd8b2 *R/f.kriging.functions.R
 c4ed712e39bbe7680c8717a94c9f57d4 *R/f.kriging.method.R
 0fb2cb54b6496e2d816196c7e6f0f44c *R/f.pixconfig.sfc.R
 0bcebbd179c9a88bd9c91d79346629e2 *R/f.pixelcovmat.R
-684db41d9fd4e6e85dfdff9eb62439a6 *R/f.pixelgrid.sfc.R
+896107cf42b92b4d70f46ac236cd9808 *R/f.pixelgrid.sfc.R
 4bc035291367e17ceeec21ee060fceb9 *R/f.point.block.cov.R
 5b8829eb751ec7259e14e409857ff050 *R/f.point.rec.covmat.R
 d4af3c6cd13c1611f0f62b9628f141ef *R/f.points.CKrige.R
@@ -31,10 +31,10 @@ a5bc9312ae192f57b2991db58d7aba22 *R/methods_CKrige.R
 afd8ab47d6c113a65c2176fbad3f32f4 *R/methods_preCKrige.R
 0edafb594331bfcb39c3ccdc1d8ea3b7 *R/methods_show_summary.R
 3add6d40f9e01eafa8386d02ce3a7ce7 *R/plot.preCKrigePolygons.R
-aa5e5a2cbfaea3d9b6cdbe378ac48cee *build/partial.rdb
+76161b65639451c966be75488458b3c3 *build/partial.rdb
 ae063a9d6e8f7a964357aa880ce1f933 *data/meuse.blocks.rda
 35f7a1f85570e0e9ff0e284fb5596d8b *inst/CITATION
-e009f007f24820688932fcf9e7c29843 *inst/ChangeLog.txt
+b5fb8262780d4df8334cc3f26303d3e5 *inst/ChangeLog.txt
 0f36375fee1723e5f7e9783ca1fb2595 *man/CKrige.Rd
 01c7583c194e3ea5d342aac75ea828e8 *man/ckcolors.Rd
 1f1ce074e84eaa2022e5429c2307a5c2 *man/constrainedKriging-package.Rd
