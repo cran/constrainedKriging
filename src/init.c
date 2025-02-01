@@ -8,19 +8,19 @@
 
 /* .C calls */
 extern void PointRectCov(
-                         double *, double *, double *, double *, 
-                         double *, double *, double *, double *, 
-                         double *, double *, double *, double *, 
-                         int *, int *, int *, int *, 
-                         int *, int *, double *, double *, 
+                         double *, double *, double *, double *,
+                         double *, double *, double *, double *,
+                         double *, double *, double *, double *,
+                         int *, int *, int *, int *,
+                         int *, int *, double *, double *,
                          int *, int *);
 
 static R_NativePrimitiveArgType PointRectCov_type[] = {
-         REALSXP, REALSXP, REALSXP, REALSXP, 
-         REALSXP, REALSXP, REALSXP, REALSXP, 
-         REALSXP, REALSXP, REALSXP, REALSXP, 
-         INTSXP, INTSXP, INTSXP, INTSXP, 
-         INTSXP, INTSXP, REALSXP, REALSXP, 
+         REALSXP, REALSXP, REALSXP, REALSXP,
+         REALSXP, REALSXP, REALSXP, REALSXP,
+         REALSXP, REALSXP, REALSXP, REALSXP,
+         INTSXP, INTSXP, INTSXP, INTSXP,
+         INTSXP, INTSXP, REALSXP, REALSXP,
          INTSXP, INTSXP
 };
 

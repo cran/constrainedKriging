@@ -17,7 +17,7 @@ ck.colors(n)
 }
 
 \arguments{
- \item{n}{a positive integer scalar with the numbers of colours in the 
+ \item{n}{a positive integer scalar with the numbers of colours in the
  palette.}
 }
 

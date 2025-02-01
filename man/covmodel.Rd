@@ -1,6 +1,7 @@
 % 2023-12-15 Andreas Papritz revision and incorporation of description of
 % covariance models taken from help page of function CovarianceFct of
 % package RandomFields version 2.0.71
+% 2025-01-28 corrections for lgd1 model
 % R CMD Rdconv -t html -o bla.html covmodel.Rd ; open bla.html;
 % R CMD Rd2pdf --force covmodel.Rd;
 
@@ -13,7 +14,7 @@
 \title{Create isotropic covariance model
 }
 
-\description{Function to generate isotropic covariance models, or add an
+\description{Function to generate isotropic covariance models or to add an
 isotropic covariance model to an existing isotropic model.}
 
 \usage{
@@ -189,11 +190,11 @@ covmodel(modelname, mev, nugget,variance, scale, parameter, add.covmodel)
 
     \item \code{lgd1} (local-global distinguisher)
     \deqn{C(h)=
-      1-\frac{\beta}{a+b}|h|^{a}, |h|\le 1 \qquad \hbox{and} \qquad
-      \frac{a}{a+b}|h|^{-b}, |h|> 1
+      1 - \frac{b}{a+b} h^{a}, h \le 1 \qquad \hbox{and} \qquad
+      \frac{a}{a+b} h^{-b}, h > 1
     }{C(h)=
-      1-b^{-1}{a+b}|h|^{a}, |h|\le 1    and
-      a^{-1}{a+b}|h|^{-b}, |h|> 1
+      1 - b/(a+b) h^{a}, h \le 1    and
+      a/(a+b) h^{-b},  h > 1
     }
     Here \eqn{b>0} and \eqn{a} msut be in
     \eqn{(0,0.5]}.

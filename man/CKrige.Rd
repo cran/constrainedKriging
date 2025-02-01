@@ -1,6 +1,7 @@
-% 2023-12-15 A. Papritz correction of spelling errors and major revision of
+% 2025-01-17 A. Papritz correction of spelling errors and major revision of
 % text, extended examples
-% cd R.user.home/constrainedKriging/constrainedKriging_02-7/pkg/man/
+% 2025-01-21 A. Papritz new example (block Kriging of domain mean for coalash data)
+% cd R.user.home/constrainedKriging/constrainedKriging_02-10/pkg/man/
 % R CMD Rdconv -t html -o bla.html CKrige.Rd ; open bla.html;
 % R CMD Rd2pdf --force CKrige.Rd;
 % hunspell -d en_GB-ise,en_GB-ize,en_GB-large -t -i mac  CKrige.Rd
@@ -27,11 +28,11 @@ isotropic covariance models.}
 \usage{
 CKrige(formula, data, locations, object, \ldots)
 
-\S4method{CKrige}{formula,data.frame,formula,preCKrigePolygons}(formula, 
-  data, locations, object, method = 2, ex.out = FALSE, ncores = 1L, 
+\S4method{CKrige}{formula,data.frame,formula,preCKrigePolygons}(formula,
+  data, locations, object, method = 2, ex.out = FALSE, ncores = 1L,
   fork = !identical(.Platform[["OS.type"]], "windows"))
 
-\S4method{CKrige}{formula,data.frame,formula,preCKrigePoints}(formula, 
+\S4method{CKrige}{formula,data.frame,formula,preCKrigePoints}(formula,
   data, locations, object, method = 2, ex.out = FALSE)
 }
 %
@@ -250,7 +251,7 @@ residuals of the linear regression.}
 
 \author{Christoph Hofer, \email{christoph.hofer@alumni.ethz.ch}}
 %
-\note{\code{print} and \code{summary} methods are available for  
+\note{\code{print} and \code{summary} methods are available for
 \code{CKrige} output object of the classes
 \dQuote{\code{CKrige.exout.polygons}} and
 \dQuote{\code{CKrige.exout.points}}.}
@@ -362,6 +363,8 @@ spplot(CMCK_block$object, zcol = "Zn", at = breaks, col.regions = ck.colors(10),
 
 
 ### example 3: lognormal universal block Kriging
+
+### block prediction by universal Kriging on log scale
 UK_block <- CKrige(formula = log(zinc) ~ sqrt(dist), data = meuse,
   locations = ~ x+y, object = preCK_block, method = 1, ex.out = TRUE)
 
@@ -429,7 +432,6 @@ spplot(CK_point, zcol = "Zn", at = breaks, col.regions = ck.colors(20),
 
 
 ### example 5: covariance-matching constrained point Kriging
-
 ### define 4 nearest neighbours to each grid location by using the
 ### knearneigh function of the spdep package
 if(!requireNamespace("spdep", quietly = TRUE)){
@@ -494,8 +496,32 @@ breaks <- seq(0, 2600, by = 185)
 spplot(UK_point$object, zcol = "Zn", at = breaks, col.regions = ck.colors(20),
   colorkey = list(labels = list(at = breaks, labels = breaks)),
   main = "UK predictions of Zn point values")
-
 }
+
+
+
+### example 7: universal block Kriging of mean over whole domain
+### cf chapter 4 of vignette of package georob
+### (https://CRAN.R-project.org/package=georob)
+if(!requireNamespace("gstat", quietly = TRUE)){
+  stop("install package gstat to run example")
+}
+### load coalash data
+data(coalash, package="gstat")
+
+### generate SpatialPointsDataFrame covering entire domain of coalash data
+coalash.domain <- rbind(c(0.5,0), c(16.5,0), c(16.5,24), c(0.5,24), c(0.5,0))
+coalash.domain <- SpatialPolygonsDataFrame(
+  SpatialPolygons(list(Polygons(list(Polygon(coalash.domain)), ID= "domain"))),
+  data=data.frame(x=8.5,y=12,row.names="domain"))
+
+### universal block Kriging
+preCK_coalash <- preCKrige(newdata = coalash.domain, model = covmodel(modelname =
+    "exponential", mev = 1.023, nugget = 0, variance = 0.268,
+    scale = 1.907), pwidth = 16, pheight = 24)
+UK_coalash <- CKrige(formula = coalash ~ x, data = coalash,
+  locations = ~ x+y, object = preCK_coalash, method = 1)
+slot( UK_coalash, "data")
 }
 
 \keyword{methods}

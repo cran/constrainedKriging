@@ -185,4 +185,22 @@ and further revision of code
 * f.pixelgrid.sfc.R (f.pixelgrid.sfc) issues warning message if pixel grid has less than 2 pixels in either of the two directions
  
 
+2025-01-17 Andreas Papritz  <papritz@retired.ethz.ch>
+
+* f.pixelgrid.sfc.R (f.pixelgrid.sfc) eliminated warning message if pixel grid has less than 2 pixels in either of the two directions
+* CKrige.Rd finer pixel grid in example 2
+ 
+
+2025-01-21 Andreas Papritz  <papritz@retired.ethz.ch>
+
+* CKrige.Rd new example 7
+ 
+
+2025-02-01 Andreas Papritz  <papritz@retired.ethz.ch>
+
+* covariancefunctions.h (f_cov_matern, f_cov_gneiting, f_cov_lgd19 correction of errors in definitions of covariance functions and further minor changes (use of scaled lag distance xx = x / *(covpar + 1))
+* freqdist.h (f_dist_freq) minor changes (definition of angle_a, angle_c)
+* intboundaries.h (f_int_boundaries, f_min_max_euclidian_distance) minor changes
+* scalePixelCoord.h (scale_pixel_coord) minor changes
+* point_block_cov.c (PointRectCov) various variables renamed, added dimension (16) in definition of array sc_pixcoords, corrected update of index variable imodr ("imodr = imodr + 3 + *nmodparam;" replaced by "imodr = imodr + 3 + *(nmodparam + kmod);")
 

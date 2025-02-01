@@ -72,11 +72,11 @@ f.point.rec.covmat<- function(
 
       if( x$model== "gencauchy" ){ x$model <- 11 }
 
-      if( x$model== "gengneiting"  && x$parameter == 1 ){ x$model <- 12 }
+      if( x$model== "gengneiting" && x$parameter == 1 ){ x$model <- 12 }
 
-      if( x$model== "gengneiting"  && x$parameter == 2 ){ x$model <- 13 }
+      if( x$model== "gengneiting" && x$parameter == 2 ){ x$model <- 13 }
 
-      if( x$model== "gengneiting"  && x$parameter == 3 ){ x$model <- 14 }
+      if( x$model== "gengneiting" && x$parameter == 3 ){ x$model <- 14 }
 
       if( x$model== "gneiting" ){ x$model <- 15 }
 
@@ -137,7 +137,6 @@ f.point.rec.covmat<- function(
 
   limit  <-  subdivisions
   lenw  <-  4*limit
-
 
   t.result <- .C(
     "PointRectCov",
