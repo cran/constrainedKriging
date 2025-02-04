@@ -1,4 +1,4 @@
-378a6213c9ce016f4d0979b1986c8bd6 *DESCRIPTION
+5d6a165d989522b83afcf5296ddd6099 *DESCRIPTION
 d9c2b283e3d86ebc4ac3c3385bba3209 *NAMESPACE
 bbd3ff83b84c3f6084998a58914bebe4 *R/AAA.R
 e8a7847acaefd3bc35ac7f8e20fdefcb *R/Class-preCKrigePoints.R
@@ -34,7 +34,7 @@ afd8ab47d6c113a65c2176fbad3f32f4 *R/methods_preCKrige.R
 76161b65639451c966be75488458b3c3 *build/partial.rdb
 ae063a9d6e8f7a964357aa880ce1f933 *data/meuse.blocks.rda
 35f7a1f85570e0e9ff0e284fb5596d8b *inst/CITATION
-7ce4a4f82e19dc411f3fba36876ef019 *inst/ChangeLog.txt
+a152cdfed42e37917268224c69de8aec *inst/ChangeLog.txt
 0a070ee058c7b2db08f5306e696be42d *man/CKrige.Rd
 55c2137a89f5d629b1514837f9b89a9b *man/ckcolors.Rd
 1f1ce074e84eaa2022e5429c2307a5c2 *man/constrainedKriging-package.Rd
@@ -49,5 +49,5 @@ e9361ea1f56751217b1e3e565975007f *man/preCKrigePolygons-class.Rd
 194ef520233b736b1292fc247c7fe18d *src/freqdist.h
 b9201c2d28f10d3a0d0f34dd49ff0818 *src/init.c
 354239722f95e4b65ea000ebce1cad6f *src/intboundaries.h
-74b4dc0d13ee3235084a9c69f2ff373b *src/point_block_cov.c
+1e190a3d1c19e26674109ff1bbb7d3df *src/point_block_cov.c
 968f305ab8b2c22f8b119180a66e385a *src/scalePixelCoord.h

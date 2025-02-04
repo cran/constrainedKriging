@@ -26,8 +26,6 @@
 //
 // Author: Christoph Hofer
 // Datum: Dezember 2009
-// geändert am 29-01-2010, ch
-// 2023-01-24 A. Papritz elimination of unnneeded variable setlb, setub
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -114,8 +112,10 @@ void PointRectCov(
   // 2025-01-26 A. Papritz various variables renamed, added dimension (16) in definition of
   //                       array sc_pixcoords, corrected update of index variable imodr
   //                       ("imodr = imodr + 3 + *nmodparam;" replaced by "imodr = imodr + 3 + *(nmodparam + kmod);")
-
-
+  //                       minor changes and editing of comments
+  // 2025-02-03 A. Papritz extended length of arrays setlowerbound and setupperbound to avoid stack-buffer-overflow
+  //                       in while loop over all pixel parts
+  
   unsigned long int ipixel; // index variable in loop over all pixels
   unsigned long int jpoint; // index variable in loop over all support points
 
@@ -147,8 +147,9 @@ void PointRectCov(
   double res;            // pointer to result passed from integration function
   double *pres = NULL;
 
-  double setlowerbound[4] = {-1,-1,-1,-1}; // array for lower integration limit(s) of pixel
-  double setupperbound[4] = {-1,-1,-1,-1}; // array for lower integration limit(s) of pixel (or its parts)
+  // 5 elements to avoid stack-buffer-overflow in following while statement
+  double setlowerbound[5] = {-1,-1,-1,-1,-1}; // array for lower integration limit(s) of pixel, 
+  double setupperbound[5] = {-1,-1,-1,-1,-1}; // array for lower integration limit(s) of pixel (or its parts)
 
   // pointers to array for lower and upper integration limits
   double *plb, *pub;
